@@ -20,7 +20,9 @@ let circleX = 0;
 let circleY = 250;
 let circleSize = 200;
 let circleSpeed = 2;
-let circleAcceleration = 0.25;
+
+
+
 
 /**
  * Description of setup
@@ -36,6 +38,5 @@ function setup() {
 function draw() {
     background(backgroundShade);
     circleX += circleSpeed;
-    circleSpeed += circleAcceleration;
     ellipse(circleX, circleY, circleSize);
 }
