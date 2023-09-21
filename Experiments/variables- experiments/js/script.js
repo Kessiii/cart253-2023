@@ -15,20 +15,22 @@ function preload() {
 
 }
 
-let backgroundShade = 0;
-let circleX = 0;
-let circleY = 250;
-let circleSize = 200;
-let circleSpeed = 2;
 
-
+let bgCanvas = 600
+let circle = {
+    x: 0,
+    y: 250,
+    size: 100,
+    speed: 1,
+    fill: 255
+}
 
 
 /**
  * Description of setup
 */
 function setup() {
-    createCanvas(500,500);
+    createCanvas(bgCanvas,bgCanvas);
 }
 
 
@@ -36,7 +38,17 @@ function setup() {
  * Description of draw()
 */
 function draw() {
-    background(backgroundShade);
-    circleX += circleSpeed;
-    ellipse(circleX, circleY, circleSize);
+    background(230,28,58);
+
+
+    circle.x = circle.x + circle.speed;
+    circle.x = constrain(circle.x, 0, width);
+    //circle.x = map(mouseX, 0, width, 100, 200);
+    if (circle.x > width);
+   
+    circle.size = map(mouseY,height, 0, 50, 500);
+    circle.fill = map(mouseX, 0,width,0,255);
+    fill(circle.fill);
+    ellipse(circle.x, circle.y, circle.size);
+
 }
