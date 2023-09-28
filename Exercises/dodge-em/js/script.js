@@ -16,7 +16,7 @@ let virus;
 
 function preload() {
 
-virus = loadImage("assets/images/virus.webp");
+virus = loadImage("assets/images/virus.jpeg");
 
 }
 
