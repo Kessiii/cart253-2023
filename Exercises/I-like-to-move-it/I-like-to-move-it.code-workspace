@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../Experiments/variables- experiments"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "I-like-to-move-it"
+	}
+}
