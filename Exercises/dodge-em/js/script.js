@@ -72,6 +72,7 @@ function setup() {
  * Description of draw()
 */
 function draw() {
+    background(0);
 
     image(virus, covid19.x, covid19.y, covid19.size);
 
@@ -107,9 +108,6 @@ function draw() {
         covid19.size -= 1;
     }
 
-    //if (covid19.x < user.x) {
-        //covid19.size = -1;
-   //}
    
 
 
@@ -145,7 +143,7 @@ function draw() {
     }
 
     //Displaying Covid 19
-    fill(covid19.fill.r,covid19.fill.g,covid19.fill.b);
+    fill(0);
     ellipse(covid19.x,covid19.y,covid19.size)
 
     //Displaying the User
