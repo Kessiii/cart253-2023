@@ -1,5 +1,5 @@
 /**
- * Covid-19 Activity
+ * Dodge-Em Exercise
  * Kestrel Villapando
  * 
  * Doing the Dodge Em exercise base of the Covid19 activity done. 
@@ -9,14 +9,14 @@
 "use strict";
 
 /**
- * Here I want to preload an image, putting a better visual for the Covid19 ellipse. 
+ * Here I want to preload an image, putting a better visual for the Covid19 ellipse. I could not figure out how to place it in the ellipse representing the virus, I was confused with mask. 
 */
 
 let virus;
 
 function preload() {
 
-virus = loadImage("assets/images/virus.jpeg");
+    virus = loadImage('assets/images/virus.png');
 
 }
 
@@ -47,7 +47,6 @@ let user = {
     maxSpeed: 2
 }
 
-let numStatic = 5000;
 
 var c1, c2;
 
@@ -69,25 +68,12 @@ function setup() {
 
 
 /**
- * Description of draw()
+ * Drawing the Virus and User, I had a hard time inserting the image, it is currently in "comment" form but once removed, I could not figure out how to mask or replace the circle with the image. But it adds to the creative pattern alongside the other ellipses!  
 */
 function draw() {
-    background(0);
+    //background(virus);
 
     image(virus, covid19.x, covid19.y, covid19.size);
-
-    //Display Static
-    for (let i = 0; i < numStatic; i++) {
-        let x = random(0,width);
-        let y = random(0,height);
-        stroke(255);
-        point(x,y)
-    }
-
-    let x = random(0,width);
-    let y = random(0,height);
-    stroke(255);
-    point(x,y);
 
 
 
@@ -112,6 +98,7 @@ function draw() {
 
 
     //User Mouvement, I changed it to follow mouse and using acceleration!
+
      if (mouseX < user.x) {
          user.ax = -user.acceleration;
      }
@@ -142,8 +129,8 @@ function draw() {
         noLoop();
     }
 
-    //Displaying Covid 19
-    fill(0);
+    //Displaying Covid 19 in multicolor
+    fill(mouseX,mouseY);
     ellipse(covid19.x,covid19.y,covid19.size)
 
     //Displaying the User
@@ -151,8 +138,11 @@ function draw() {
     ellipse(user.x,user.y,user.size);
 }
 
+/**
+ * I tried a gradient, tried my best to understand, I kind of loved the result! Intense and shapes everywhere!
+*/
 function setGradient(c1, c2) {
-    // noprotect
+    //noprotect
     noFill();
     for (var y = 0; y < height; y++) {
       var inter = map(y, 0, height, 0, 1);
