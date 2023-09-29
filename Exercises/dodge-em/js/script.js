@@ -9,17 +9,15 @@
 "use strict";
 
 /**
- * Here I want to preload an image, putting a better visual for the Covid19 ellipse. I could not figure out how to place it in the ellipse representing the virus, I was confused with mask. 
+ * Here I want to preload an image, putting a better visual for the Covid19 ellipse. I could not figure out how to place it in the ellipse representing the virus, I was confused with mask. It is still present.
 */
 
 let virus;
 
 function preload() {
-
     virus = loadImage('assets/images/virus.png');
 
 }
-
 
 let covid19 = {
     x: 0,
@@ -47,11 +45,10 @@ let user = {
     maxSpeed: 2
 }
 
-
 var c1, c2;
 
 /**
- * Setting up a Canvas
+ * Setting up a Canvas and the gradient!
 */
 function setup() {
     createCanvas(windowWidth,windowHeight);
@@ -68,10 +65,9 @@ function setup() {
 
 
 /**
- * Drawing the Virus and User, I had a hard time inserting the image, it is currently active, it adds to the creative pattern alongside the other ellipses! But also if it's removed, the ellipses create a really nice 3D effect when trying to dodge the Covid19 ellipse!
+ * Drawing the Virus and User, I had a hard time inserting the image, it is currently active, it adds to the creative pattern alongside the other ellipses! But also if it's removed, the user ellipse create a really nice 3D effect when trying to dodge the Covid19 ellipse!
 */
 function draw() {
-
     image(virus, covid19.x, covid19.y, covid19.size);
 
 
@@ -85,7 +81,7 @@ function draw() {
         covid19.y = random(0,height);
     }
 
-    //adding my new "if" statement in this next section. 
+    //Adding my new "if" statement in this next section. 
     if (covid19.x >= user.x) {
         covid19.size += 1;
     }
@@ -94,7 +90,6 @@ function draw() {
     }
 
    
-
 
     //User Mouvement, I changed it to follow mouse and using acceleration!
 
