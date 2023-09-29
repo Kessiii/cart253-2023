@@ -68,10 +68,9 @@ function setup() {
 
 
 /**
- * Drawing the Virus and User, I had a hard time inserting the image, it is currently in "comment" form but once removed, I could not figure out how to mask or replace the circle with the image. But it adds to the creative pattern alongside the other ellipses!  
+ * Drawing the Virus and User, I had a hard time inserting the image, it is currently active, it adds to the creative pattern alongside the other ellipses! But also if it's removed, the ellipses create a really nice 3D effect when trying to dodge the Covid19 ellipse!
 */
 function draw() {
-    //background(virus);
 
     image(virus, covid19.x, covid19.y, covid19.size);
 
@@ -134,7 +133,7 @@ function draw() {
     ellipse(covid19.x,covid19.y,covid19.size)
 
     //Displaying the User
-    fill (255);
+    fill (0,0,255);
     ellipse(user.x,user.y,user.size);
 }
 
