@@ -38,13 +38,25 @@ function setup() {
 function draw() {
     background(0);
 
+    move();
+    wrap();
+    display();
+}
+
+
+function move() {
     circle.x = circle.x + circle.vx;
     circle.y = circle.y + circle.vy; 
+}
 
+
+function wrap() {
     if (circle.x > width) {
         reset();
     }
+}
 
+function display() {
     fill(255,0,0)
     ellipse(circle.x,circle.y,circle.size);
 }
@@ -54,6 +66,7 @@ function reset() {
     circle.vx = circle.vx + 2;
     circle.size + circle.size + 5;
 }
+
 
 function mousePressed() {
     reset();
