@@ -97,8 +97,8 @@ function sadness() {
 
 function move() {
     //Move the circles
-    circle1.x = circle1.x + circle1.vx;
-    circle1.y = circle1.y + circle1.vy;
+    circle1.x = mouseX;
+    circle1.y = mouseY;
 
     circle2.x = circle2.x + circle2.vx;
     circle2.y = circle2.y + circle2.vy;
@@ -135,8 +135,6 @@ function setupCircles() {
     circle2.x = 2 * width / 3;
 
     //Start circles moving ina random direction
-    circle1.vx = random(-circle1.speed,circle1.speed);
-    circle1.vy = random(-circle1.speed,circle1.speed);
     circle2.vx = random(-circle2.speed,circle2.speed);
     circle2.vy = random(-circle2.speed,circle2.speed);
 }
