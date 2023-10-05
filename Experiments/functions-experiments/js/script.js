@@ -42,17 +42,19 @@ function draw() {
     circle.y = circle.y + circle.vy; 
 
     if (circle.x > width) {
-        circle.x = 0;
-        circle.vx = circle.vx + 2;
-        circle.size = circle.size + 5;
+        reset();
     }
 
     fill(255,0,0)
     ellipse(circle.x,circle.y,circle.size);
 }
 
-function mousePressed() {
+function reset() {
     circle.x = 0;
     circle.vx = circle.vx + 2;
     circle.size + circle.size + 5;
+}
+
+function mousePressed() {
+    reset();
 }
