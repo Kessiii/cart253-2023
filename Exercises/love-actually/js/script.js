@@ -28,7 +28,7 @@ let circle2 = {
 };
 
 
-let state = `title`; // Can be: title, simulation, love, sadness
+let state = `title`; // Can be: title, simulation, caught, escaped
 
 function setup() {
     createCanvas(500,500);
@@ -49,11 +49,11 @@ function draw() {
     else if (state ===`simulation`) {
         simulation();
     }
-    else if (state === `love`) {
-        love();
+    else if (state === `caught`) {
+        caught();
     }
-    else if (state === `sadness`) {
-        sadness();
+    else if (state === `escaped`) {
+        escaped();
     }
 
 }
@@ -77,7 +77,7 @@ function simulation() {
 
 }
 
-function love() {
+function caught() {
     push();
     textSize(64);
     fill(150,150,255);
@@ -86,7 +86,7 @@ function love() {
     pop();
 }
 
-function sadness() {
+function escaped() {
     push();
     textSize(20);
     fill(255,150,150);
@@ -109,7 +109,7 @@ function checkOffscreen() {
 
      //Check if the circles have gone offscreen
      if(circle1.x < 0 || circle1.x > width || circle1.y < 0 || circle1.y > height || circle2.x < 0 || circle2.x > width || circle2.y < 0 || circle2.y > height) {
-        state = `sadness`;
+        state = `escaped`;
     }
 }
 
@@ -118,11 +118,12 @@ function checkOverlap() {
        //Check if the circles overlap
        let d = dist(circle1.x,circle1.y,circle2.x,circle2.y);
        if(d < circle1.size/2 + circle2.size/2) {
-          state = `love`;
+          state = `caught`;
        }
 }
 
 var xoff = 0;
+
 //Added one extra function for perlin
 function perlin() {
     var x = map(noise(xoff), 0, 1, 0, width);
@@ -149,8 +150,23 @@ function setupCircles() {
     circle2.vy = random(-circle2.speed,circle2.speed);
 }
 
+function ponder() {
+    push();
+    textSize(20);
+    fill(255,150,150);
+    textAlign(CENTER,CENTER);
+    text(`Or... should you turn back and give it a shot <3? (I suggest not...)`,width/2,height/2);
+    pop();
+}
+
 function mousePressed() {
     if (state === `title`) {
         state = `simulation`;
+    }
+}
+
+function keyPressed() {
+    if (state === `escaped`) {
+        state === `ponder`;
     }
 }
