@@ -55,6 +55,12 @@ function draw() {
     else if (state === `escaped`) {
         escaped();
     }
+    else if (state === `ponder`)  {
+        ponder();
+    }
+    else if (state === `think`) {
+        think();
+    }
 
 }
 
@@ -63,7 +69,7 @@ function title() {
     textSize(15);
     fill(200,100,100);
     textAlign(CENTER,CENTER);
-    text(`YOU ARE A FAMOUS YOUTUBER, ESCAPE THE CRAZY FAN!
+    text(`YOU ARE A CELEBERITY, ESCAPE THE CRAZY FAN!
     Cross to the other side!`,width/2,height/2);
     pop();
 }
@@ -95,6 +101,30 @@ function escaped() {
     pop();
 }
 
+function ponder() {
+    background(mouseX,mouseY);
+
+    push();
+    textSize(20);
+    fill(255,150,150);
+    textAlign(CENTER,CENTER);
+    text(`Finally some peace and quiet. 
+    No crazy fan to run from, no one cares 
+    where you are... No one...`,width/2,height/2);
+    pop();
+}
+
+function think() {
+    push();
+    textSize(15);
+    fill(255,150,150);
+    textAlign(CENTER,CENTER);
+    text(`You're all alone... You don't even know if your friends like you 
+    for who you are... Or if they just enjoy being friends with a celebrity. 
+    The only love, the only true love, you've ever had... 
+    it was those fans`,width/2,height/2);
+    pop();
+}
 
 function move() {
     //Move the circles
@@ -150,23 +180,14 @@ function setupCircles() {
     circle2.vy = random(-circle2.speed,circle2.speed);
 }
 
-function ponder() {
-    push();
-    textSize(20);
-    fill(255,150,150);
-    textAlign(CENTER,CENTER);
-    text(`Or... should you turn back and give it a shot <3? (I suggest not...)`,width/2,height/2);
-    pop();
-}
-
 function mousePressed() {
     if (state === `title`) {
         state = `simulation`;
     }
-}
-
-function keyPressed() {
-    if (state === `escaped`) {
-        state === `ponder`;
+    else if (state === `escaped`) {
+        state = `ponder`;
     }
+    else if (state === `ponder`) {
+        state = `think`;
+}
 }
