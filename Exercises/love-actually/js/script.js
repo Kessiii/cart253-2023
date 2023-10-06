@@ -129,6 +129,7 @@ function think() {
     pop();
 }
 
+//This is my alternate/extra ending, making you ponder as you escaped the crazy fan, maybe you want to go back? 
 function realize() {
     push();
     textSize(15);
@@ -139,7 +140,7 @@ function realize() {
 }
 
 function move() {
-    //Move the circles
+    //Move the user circle and made it follow the cursor instead.
     circle1.x = mouseX;
     circle1.y = mouseY;
 
@@ -164,9 +165,10 @@ function checkOverlap() {
        }
 }
 
+
 var xoff = 0;
 
-//Added one extra function for perlin
+//Added one extra function for perlin decided to make the other circle move randomnly trying to prevent the user from crossing.
 function perlin() {
     var x = map(noise(xoff), 0, 1, 0, width);
 
@@ -175,11 +177,13 @@ function perlin() {
     xoff += 0.1;
 }
 
+
 function display() {
       //Diplaying the Circles
 
       ellipse(circle1.x,circle1.y,circle1.size);
 }
+
 
 function setupCircles() {
 
@@ -191,6 +195,7 @@ function setupCircles() {
     circle2.vx = random(-circle2.speed,circle2.speed);
     circle2.vy = random(-circle2.speed,circle2.speed);
 }
+
 
 function mousePressed() {
     if (state === `title`) {
