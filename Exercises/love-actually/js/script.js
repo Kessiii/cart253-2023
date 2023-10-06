@@ -60,10 +60,11 @@ function draw() {
 
 function title() {
     push();
-    textSize(64);
+    textSize(15);
     fill(200,100,100);
     textAlign(CENTER,CENTER);
-    text(`LOVE?`,width/2,height/2);
+    text(`YOU ARE A FAMOUS YOUTUBER, ESCAPE THE CRAZY FAN!
+    Cross to the other side!`,width/2,height/2);
     pop();
 }
 
@@ -81,16 +82,16 @@ function love() {
     textSize(64);
     fill(150,150,255);
     textAlign(CENTER,CENTER);
-    text(`LOVE<3`,width/2,height/2);
+    text(`GOTCHA!hehe`,width/2,height/2);
     pop();
 }
 
 function sadness() {
     push();
-    textSize(64);
+    textSize(20);
     fill(255,150,150);
     textAlign(CENTER,CENTER);
-    text(`T_T`,width/2,height/2);
+    text(`RUN FOREST RUN!!`,width/2,height/2);
     pop();
 }
 
@@ -100,8 +101,7 @@ function move() {
     circle1.x = mouseX;
     circle1.y = mouseY;
 
-    circle2.x = circle2.x + circle2.vx;
-    circle2.y = circle2.y + circle2.vy;
+    perlin()
 
 }
 
@@ -122,10 +122,20 @@ function checkOverlap() {
        }
 }
 
+var xoff = 0;
+//Added one extra function for perlin
+function perlin() {
+    var x = map(noise(xoff), 0, 1, 0, width);
+
+    ellipse(x,circle2.y,circle2.size);
+
+    xoff += 0.1;
+}
+
 function display() {
       //Diplaying the Circles
+
       ellipse(circle1.x,circle1.y,circle1.size);
-      ellipse(circle2.x,circle2.y,circle2.size);
 }
 
 function setupCircles() {
