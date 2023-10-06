@@ -61,6 +61,9 @@ function draw() {
     else if (state === `think`) {
         think();
     }
+    else if (state === `realize`) {
+        realize();
+    }
 
 }
 
@@ -126,6 +129,15 @@ function think() {
     pop();
 }
 
+function realize() {
+    push();
+    textSize(15);
+    fill(255,150,150);
+    textAlign(CENTER,CENTER);
+    text(`Maybe... maybe you should go see what they are up to`,width/2,height/2);
+    pop();
+}
+
 function move() {
     //Move the circles
     circle1.x = mouseX;
@@ -175,7 +187,7 @@ function setupCircles() {
     circle1.x = width/3;
     circle2.x = 2 * width / 3;
 
-    //Start circles moving ina random direction
+    //Start circles moving in a random direction
     circle2.vx = random(-circle2.speed,circle2.speed);
     circle2.vy = random(-circle2.speed,circle2.speed);
 }
@@ -189,5 +201,11 @@ function mousePressed() {
     }
     else if (state === `ponder`) {
         state = `think`;
-}
+    }
+    else if (state === `think`) {
+        state = `realize`;
+    }
+    else if (state === `realize`) {
+        state = `title`;
+    }
 }
