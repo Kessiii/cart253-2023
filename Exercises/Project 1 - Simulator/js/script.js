@@ -1,9 +1,8 @@
 /**
- * Title of Project
- * Author Name
+ * Desert Winds
+ * Kestrel Villapando
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * This is my simulator of a bird's eye view of a desert using Flow Fields. It has somewhat of a abstract look.
  */
 
 "use strict";
@@ -19,8 +18,14 @@ function preload() {
 /**
  * Description of setup
 */
-function setup() {
+let p = [];
+const num = 100;
 
+function setup() {
+    createCanvas(400, 400);
+    for(let i = 0; i < num; i ++) {
+        p.push(createVector(random(width), random(height)));
+    }
 }
 
 
@@ -28,5 +33,5 @@ function setup() {
  * Description of draw()
 */
 function draw() {
-
+    background(0)
 }
