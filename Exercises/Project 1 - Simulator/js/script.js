@@ -16,20 +16,11 @@ function preload() {
 }
 
 
-
 /**
  * Description of setup
 */
-
-let p = [];
-const num = 100;
-
 function setup() {
-    createCanvas(400,400);
-    for(let i = 0; i < num; i ++) {
-        particles.push(createVector(random(width), random(height)))
-    }
-    stroke(255);
+
 }
 
 
@@ -37,9 +28,5 @@ function setup() {
  * Description of draw()
 */
 function draw() {
-    background(255);
-    for(let i = 0; i < num; i ++) {
-        let p = particles[i];
-        point(p.x, p.y)
-    }
+
 }
