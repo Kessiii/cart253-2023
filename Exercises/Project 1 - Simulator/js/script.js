@@ -19,7 +19,8 @@ function preload() {
  * Description of setup
 */
 let particles = [];
-const num = 100;
+const num = 1000;
+const noiseScale = 0.01;
 
 function setup() {
     createCanvas(400, 400);
@@ -39,5 +40,17 @@ function draw() {
     for(let i = 0; i < num; i ++) {
         let p = particles[i];
         point(p.x, p.y);
+        let n = noise(p.x * noiseScale, p.y * noiseScale);
+        let a = TAU * n;
+        p.x += cos(a);
+        p.y += sin(a);
+        if(!onScreen(p)) {
+            p.x = random(width);
+            p.y = random(height);
+        }
     }
+}
+
+function onScreen(v) {
+    return v.x >= 0 && v.x >= 0 && v.y<= height;
 }
