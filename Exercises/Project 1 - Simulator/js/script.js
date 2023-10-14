@@ -19,8 +19,8 @@ function preload() {
  * Description of setup
 */
 let particles = [];
-const num = 5000;
-const noiseScale = 0.01;
+const num = 10000;
+const noiseScale = 0.023;
 
 function setup() {
     createCanvas(800, 800);
@@ -35,12 +35,18 @@ function setup() {
 /**
  * Description of draw()
 */
+
+let cursorX, cursorY;
+
 function draw() {
-    background(0, 10);
+    cursorX = mouseX; // Store the curent X position of the cursor
+    cursorY = mouseY; // Sotre the current Y position of the cursor
+
+    background(169, 144, 117, 10);
     for(let i = 0; i < num; i ++) {
         let p = particles[i];
         point(p.x, p.y);
-        let n = noise(p.x * noiseScale, p.y * noiseScale);
+        let n = noise((p.x + cursorX) * noiseScale, (p.y + cursorY) * noiseScale);
         let a = TAU * n;
         p.x += cos(a);
         p.y += sin(a);
@@ -51,9 +57,9 @@ function draw() {
     }
 }
 
-function mouseReleased() {
-    noiseSeed(millis());
-}
+//function mouseReleased() {
+    //noiseSeed(millis());
+//}
 
 function onScreen(v) {
     return v.x >= 0 && v.x >= 0 && v.y<= height;
