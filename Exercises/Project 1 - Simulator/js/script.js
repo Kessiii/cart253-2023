@@ -19,11 +19,11 @@ function preload() {
  * Description of setup
 */
 let particles = [];
-const num = 1000;
+const num = 5000;
 const noiseScale = 0.01;
 
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(800, 800);
     for(let i = 0; i < num; i ++) {
         particles.push(createVector(random(width), random(height)));
     }
@@ -36,7 +36,7 @@ function setup() {
  * Description of draw()
 */
 function draw() {
-    background(0)
+    background(0, 10);
     for(let i = 0; i < num; i ++) {
         let p = particles[i];
         point(p.x, p.y);
@@ -49,6 +49,10 @@ function draw() {
             p.y = random(height);
         }
     }
+}
+
+function mouseReleased() {
+    noiseSeed(millis());
 }
 
 function onScreen(v) {
