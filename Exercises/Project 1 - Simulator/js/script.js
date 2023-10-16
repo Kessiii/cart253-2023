@@ -20,10 +20,10 @@ function preload() {
 */
 let particles = [];
 const num = 10000;
-const noiseScale = 0.023;
+const noiseScale = 0.033;
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(1000, 800);
     for(let i = 0; i < num; i ++) {
         particles.push(createVector(random(width), random(height)));
     }
