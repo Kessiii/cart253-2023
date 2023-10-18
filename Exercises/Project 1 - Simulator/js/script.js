@@ -20,14 +20,15 @@ function preload() {
 */
 let particles = [];
 const num = 15000;
-const noiseScale = 0.033;
+const noiseScale = 0.083;
+const damping = 1.05;
 
 function setup() {
     createCanvas(1000, 800);
     for(let i = 0; i < num; i ++) {
         particles.push(createVector(random(width), random(height)));
     }
-    stroke(250);
+    stroke(255);
 }
 
 
@@ -46,25 +47,21 @@ function draw() {
     for(let i = 0; i < num; i ++) {
         let p = particles[i];
         point(p.x, p.y);
+        let n = noise((p.x + cursorX) * noiseScale, (p.y + cursorY) * noiseScale);
+        let a = TAU * n;
 
-        let angle = antan2(cursorY - p.y, cursorX - p.x);
+        let dx = cos(a);
+        let dy = sin(a);
+        p.x = lerp(p.x, p.x + dx, damping);
+        p.y = lerp(p.y, p.y + dy, damping);
 
-        p.x += cos(angle);
-        p.y += sin(angle);
-
-        //if(!onScreen(p)) {
-            //p.x = random(width);
-            //p.y = random(height);
-        }
-
-        //let n = noise((p.x + cursorX) * noiseScale, (p.y + cursorY) * noiseScale);
-        //let a = TAU * n;
         //p.x += cos(a);
         //p.y += sin(a);
-        //if(!onScreen(p)) {
-        //    p.x = random(width);
-        //    p.y = random(height);
-        //}
+
+        if(!onScreen(p)) {
+            p.x = random(width);
+            p.y = random(height);
+        }
     }
     
 }
@@ -74,6 +71,5 @@ function mouseReleased() {
 }
 
 function onScreen(v) {
-    return v.x >= 0 && v.x <= width && v.y >= 0 && v.y<= height;
-    //return v.x >= 0 && v.x >= 0 && v.y<= height;
+    return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
 }
