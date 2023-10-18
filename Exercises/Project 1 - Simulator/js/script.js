@@ -46,14 +46,25 @@ function draw() {
     for(let i = 0; i < num; i ++) {
         let p = particles[i];
         point(p.x, p.y);
-        let n = noise((p.x + cursorX) * noiseScale, (p.y + cursorY) * noiseScale);
-        let a = TAU * n;
-        p.x += cos(a);
-        p.y += sin(a);
-        if(!onScreen(p)) {
-            p.x = random(width);
-            p.y = random(height);
+
+        let angle = antan2(cursorY - p.y, cursorX - p.x);
+
+        p.x += cos(angle);
+        p.y += sin(angle);
+
+        //if(!onScreen(p)) {
+            //p.x = random(width);
+            //p.y = random(height);
         }
+
+        //let n = noise((p.x + cursorX) * noiseScale, (p.y + cursorY) * noiseScale);
+        //let a = TAU * n;
+        //p.x += cos(a);
+        //p.y += sin(a);
+        //if(!onScreen(p)) {
+        //    p.x = random(width);
+        //    p.y = random(height);
+        //}
     }
     
 }
@@ -63,5 +74,6 @@ function mouseReleased() {
 }
 
 function onScreen(v) {
-    return v.x >= 0 && v.x >= 0 && v.y<= height;
+    return v.x >= 0 && v.x <= width && v.y >= 0 && v.y<= height;
+    //return v.x >= 0 && v.x >= 0 && v.y<= height;
 }
