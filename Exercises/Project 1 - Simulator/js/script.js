@@ -20,8 +20,12 @@ function preload() {
 */
 let particles = [];
 const num = 15000;
-const noiseScale = 0.033;
-const repulsionDistance = 100; // Adjust this value to control the strength of repulsion
+let noiseScale = 0.003;
+const targetNoiseScale = 0.0015;
+const noiseChangeRate = 0.004;
+const repulsionRadius = 30
+
+let followCursor = false
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -32,40 +36,60 @@ function setup() {
 }
 
 function draw() {
-    background(0, 0, 0, 10);
+    background(169, 144, 117, 10);
+
     for (let i = 0; i < num; i++) {
         let p = particles[i];
-        point(p.x, p.y);
 
-        // Calculate the vector from the particle to the cursor
-        let dirToCursor = createVector(cursorX - p.x, cursorY - p.y);
-        let distanceToCursor = dirToCursor.mag();
+       
+            let dx = p.x - mouseX;
+            let dy = p.y - mouseY;
+            let distance = sqrt(dx * dx + dy * dy);
+            if (distance < repulsionRadius) {
+                let angle = atan2(dy, dx);
+                let repulsion = map(distance, 0, repulsionRadius, 50, 1); // Adjust the repulsion strength
+                p.x += cos(angle) * repulsion;
+                p.y += sin(angle) * repulsion;
+        }
 
-        // Apply a repulsive force if the particle is too close to the cursor
-        if (distanceToCursor < repulsionDistance) {
-            let repulsion = dirToCursor.copy();
-            repulsion.normalize();
-            repulsion.mult(1 / (distanceToCursor + 1)); // Adjust the strength here
-            p.add(repulsion);
-        } else {
-            // If not close to the cursor, apply Perlin noise movement
+              // Wrap particles around the canvas
+              p.x = (p.x + width) % width;
+              p.y = (p.y + height) % height;
+              if (p.x < 0) {
+                p.x = width;
+                p.y = random(0, height);
+              }
+              if (p.y > height) {
+                p.y = 0
+                p.x = random(0, width);
+              }
+              if (p.y < 0) {
+                p.y = height
+                p.x = random(0, width);
+              }
+
+    
             let n = noise(p.x * noiseScale, p.y * noiseScale);
             let a = TAU * n;
             p.x += cos(a);
             p.y += sin(a);
-        }
 
-        // Wrap particles around the canvas
-        p.x = (p.x + width) % width;
-        p.y = (p.y + height) % height;
+          // Wrap particles around the canvas
+          //p.x = (p.x + width) % width;
+          //p.y = (p.y + height) % height;
+  
+          ellipse(p.x, p.y, 2, 2);
     }
+
+
 }
 
-function onScreen(v) {
-    return v.x >= 0 && v.x >= 0 && v.y <= height;
-}
 
-function mouseMoved() {
-    cursorX = mouseX;
-    cursorY = mouseY;
+function mousePressed() {
+    followCursor = !followCursor;
+    if (!followCursor) {
+        targetNoiseScale = 0.08;
+    } else {
+        targetNoiseScale = 0.01;
+    }
 }
