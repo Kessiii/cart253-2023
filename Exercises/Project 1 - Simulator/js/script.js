@@ -21,47 +21,51 @@ function preload() {
 let particles = [];
 const num = 15000;
 const noiseScale = 0.033;
+const repulsionDistance = 100; // Adjust this value to control the strength of repulsion
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    for(let i = 0; i < num; i ++) {
+    for (let i = 0; i < num; i++) {
         particles.push(createVector(random(width), random(height)));
     }
     stroke(255);
 }
 
-
-
-/**
- * Description of draw()
-*/
-
-let cursorX, cursorY;
-
 function draw() {
-    cursorX = mouseX; // Store the curent X position of the cursor
-    cursorY = mouseY; // Sotre the current Y position of the cursor
-
     background(0, 0, 0, 10);
-    for(let i = 0; i < num; i ++) {
+    for (let i = 0; i < num; i++) {
         let p = particles[i];
         point(p.x, p.y);
-        let n = noise((p.x + cursorX) * noiseScale, (p.y + cursorY) * noiseScale);
-        let a = TAU * n;
-        p.x += cos(a);
-        p.y += sin(a);
-        if(!onScreen(p)) {
-            p.x = random(width);
-            p.y = random(height);
-        }
-    }
-    
-}
 
-function mouseReleased() {
-    noiseSeed(millis());
+        // Calculate the vector from the particle to the cursor
+        let dirToCursor = createVector(cursorX - p.x, cursorY - p.y);
+        let distanceToCursor = dirToCursor.mag();
+
+        // Apply a repulsive force if the particle is too close to the cursor
+        if (distanceToCursor < repulsionDistance) {
+            let repulsion = dirToCursor.copy();
+            repulsion.normalize();
+            repulsion.mult(1 / (distanceToCursor + 1)); // Adjust the strength here
+            p.add(repulsion);
+        } else {
+            // If not close to the cursor, apply Perlin noise movement
+            let n = noise(p.x * noiseScale, p.y * noiseScale);
+            let a = TAU * n;
+            p.x += cos(a);
+            p.y += sin(a);
+        }
+
+        // Wrap particles around the canvas
+        p.x = (p.x + width) % width;
+        p.y = (p.y + height) % height;
+    }
 }
 
 function onScreen(v) {
     return v.x >= 0 && v.x >= 0 && v.y <= height;
+}
+
+function mouseMoved() {
+    cursorX = mouseX;
+    cursorY = mouseY;
 }
