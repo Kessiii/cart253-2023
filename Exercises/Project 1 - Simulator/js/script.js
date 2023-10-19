@@ -19,7 +19,7 @@ function preload() {
  * Description of setup
 */
 let particles = [];
-const num = 2000;
+const num = 10000;
 const noiseScale = 0.033;
 let followCursor = false;
 var song;
@@ -60,8 +60,8 @@ function draw() {
         if (followCursor) {
             let targetX = mouseX + random(-5, 5);
             let targetY = mouseY + random(-5, 5);
-            p.x = lerp(p.x, targetX, 0.5);
-            p.y = lerp(p.y, targetY, 0.5);
+            p.x = lerp(p.x, targetX, 0.1);
+            p.y = lerp(p.y, targetY, 0.1);
         } else {
             let n = noise(p.x * noiseScale, p.y * noiseScale);
             let a = TAU * n;
