@@ -22,6 +22,8 @@ let particles = [];
 const num = 1000;
 const noiseScale = 0.005;
 let followCursor = false; //added a boolean to control particle movement
+let titleScreen = true;
+let enterButton;
 
 //let bgColor;
 //let strokeColor;
@@ -34,6 +36,13 @@ function setup() {
 
     noStroke();
     resetParticles();
+
+    //Creating the "Enter" button
+    enterButton = createButton('Enter');
+    enterButton.position(width / 2 - 40, height / 2);
+    enterButton.mousePressed(enterFlowField);
+    enterButton.style('background-color', 'brown');
+    enterButton.mousePressed(enterFlowField)
 }
 
 function resetParticles() {
@@ -53,8 +62,11 @@ function resetParticles() {
 //let cursorX, cursorY;
 
 function draw() {
-    background(169, 144, 117, 10);
+    if (titleScreen) {
+        background(169, 144, 117, 10);
+    } else {
 
+        followCursor = !followCursor;
         for(let i = 0; i < num; i ++) {
             let p = particles[i];
 
@@ -73,10 +85,11 @@ function draw() {
             p.x = (p.x + width) % width;
             p.y = (p.y + height) % height;
     
-    
-           ellipse(p.x, p.y, 5, 5);
+            fill(255, 100)
+            ellipse(p.x, p.y, 5, 5);
            }
         }
+    }
 
     
 
@@ -98,9 +111,19 @@ function draw() {
     //return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
 //}
 
+function enterFlowField() {
+    titleScreen = false;
+    followCursor = true;
+    enterButton.remove();
+}
+
 function mousePressed() {
-    //Toggle the color inversion state when the mouse is clicked
-    followCursor = !followCursor;
+
+    if (!titleScreen) {
+        followCursor = !followCursor;
+    }
+   
+
     if(!followCursor) {
         resetParticles();
     }
