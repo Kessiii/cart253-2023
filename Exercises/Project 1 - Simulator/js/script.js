@@ -19,8 +19,8 @@ function preload() {
  * Description of setup
 */
 let particles = [];
-const num = 10000;
-const noiseScale = 0.033;
+const num = 1000;
+const noiseScale = 0.003;
 let followCursor = false; //added a boolean to control particle movement
 
 //let bgColor;
@@ -44,15 +44,29 @@ function setup() {
  * Description of draw()
 */
 
-let cursorX, cursorY;
+//let cursorX, cursorY;
 
 function draw() {
     if (followCursor) {
-        cursorX = mouseX; // Store the curent X position of the cursor
-        cursorY = mouseY; // Sotre the current Y position of the cursor
+        background(169, 144, 117, 10);
+        for(let i = 0; i < num; i ++) {
+            let p = particles[i];
+            point(p.x, p.y);
+    
+           let angle = atan2(mouseY - p.y, mouseX - p.x);
+           let distance = dist(p.x, p.y, mouseX, mouseY);
+    
+           p.x += cos(angle) * distance * 0.01;
+           p.y += sin(angle) * distance * 0.01;
+    
+           if (p.x < 0 || p.x > width || p.y < 0 || p.y > height) {
+            p.x = random(width);
+            p.y = random(height);
+           }
+        }
+
     }
     
-    background(169, 144, 117, 10);
 
     //if (colorInverted) {
         //background(169, 144, 117, 10); //inverted background color
@@ -61,24 +75,6 @@ function draw() {
         //background(bgColor); //Original background color
         //stroke(strokeColor); //Original stroke color
     //}
-
-
-    for(let i = 0; i < num; i ++) {
-        let p = particles[i];
-        point(p.x, p.y);
-
-        if (followCursor) {
-            let n = noise((p.x + cursorX) * noiseScale, (p.y + cursorY) * noiseScale);
-            let a = TAU * n;
-            p.x += cos(a);
-            p.y += sin(a);
-        }
-
-        if(!onScreen(p)) {
-            p.x = random(width);
-            p.y = random(height);
-        }
-    }
     
 }
 
@@ -86,9 +82,9 @@ function draw() {
     //noiseSeed(millis());
 //}
 
-function onScreen(v) {
-    return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
-}
+//function onScreen(v) {
+    //return v.x >= 0 && v.x <= width && v.y >= 0 && v.y <= height;
+//}
 
 function mousePressed() {
     //Toggle the color inversion state when the mouse is clicked
