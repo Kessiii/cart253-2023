@@ -32,12 +32,17 @@ function setup() {
     //bgColor = color(255); //Initial background color
     //strokeColor = color(169, 144, 117); // Initial stroke color
 
-    noStroke()
+    noStroke();
+    resetParticles();
+}
 
+function resetParticles() {
+    particles = [];
     for(let i = 0; i < num; i ++) {
         particles.push(createVector(random(width), random(height)));
     }
 }
+
 
 
 
@@ -96,4 +101,7 @@ function draw() {
 function mousePressed() {
     //Toggle the color inversion state when the mouse is clicked
     followCursor = !followCursor;
+    if(!followCursor) {
+        resetParticles();
+    }
 }
