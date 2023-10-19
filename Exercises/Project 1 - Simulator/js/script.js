@@ -22,11 +22,17 @@ let particles = [];
 const num = 10000;
 const noiseScale = 0.033;
 let followCursor = false;
+var song;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    song = loadSound("Nascence.mp3", loaded);
     stroke(255);
     resetParticles();
+}
+
+function loaded() {
+    song.play();
 }
 
 function resetParticles() {
