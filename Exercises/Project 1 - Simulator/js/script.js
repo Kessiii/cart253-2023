@@ -22,8 +22,7 @@ let particles = [];
 const num = 2000;
 const noiseScale = 0.033;
 let followCursor = false;
-let song;
-let musicEnded = false // Flag to track if the music has ended
+var song;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -52,11 +51,12 @@ function resetParticles() {
 function draw() {
     //cursorX = mouseX; // Store the curent X position of the cursor
     //cursorY = mouseY; // Sotre the current Y position of the cursor
-if (song.isPlaying()) {
+
     background(169, 144, 117, 10);
 
     for(let i = 0; i < num; i ++) {
         let p = particles[i];
+
         if (followCursor) {
             let targetX = mouseX + random(-5, 5);
             let targetY = mouseY + random(-5, 5);
@@ -69,23 +69,11 @@ if (song.isPlaying()) {
             p.y += sin(a);
         }
 
-         //Wrap particles around the canvas
-         p.x = (p.x + width) % width;
-         p.y = (p.y + height) % height;
- 
-         ellipse(p.x, p.y, 1, 1);
-    }
+        //Wrap particles around the canvas
+        p.x = (p.x + width) % width;
+        p.y = (p.y + height) % height;
 
-} else if (!musicEnded) {
-    //Music has ended, show End Screen
-    background(0);
-    textSize(35);
-    fill(255);
-    textAlign(CENTER, CENTER);
-    text("Music Ended", width / 2, height / 2);
-    musicEnded = true;
-    }
-}
+        ellipse(p.x, p.y, 1, 1);
 
         //point(p.x, p.y);
         //let n = noise((p.x + cursorX) * noiseScale, (p.y + cursorY) * noiseScale);
@@ -96,10 +84,9 @@ if (song.isPlaying()) {
             //p.x = random(width);
             //p.y = random(height);
        // }
+    }
     
-    
-
-
+}
 
 //function mouseReleased() {
     //noiseSeed(millis());
