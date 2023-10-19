@@ -22,12 +22,19 @@ let particles = [];
 const num = 10000;
 const noiseScale = 0.033;
 
+let bgColor;
+let strokeColor;
+let colorInverted = false; // added boolean for color inversion
+
 function setup() {
-    createCanvas(1000, 800);
+    createCanvas(windowWidth, windowHeight);
+    bgColor = color(255); //Initial background color
+    strokeColor = color(169, 144, 117); // Initial stroke color
+
     for(let i = 0; i < num; i ++) {
         particles.push(createVector(random(width), random(height)));
     }
-    stroke(255);
+    stroke(strokeColor);
 }
 
 
@@ -42,7 +49,15 @@ function draw() {
     cursorX = mouseX; // Store the curent X position of the cursor
     cursorY = mouseY; // Sotre the current Y position of the cursor
 
-    background(169, 144, 117, 10);
+    if (colorInverted) {
+        background(169, 144, 117, 10); //inverted background color
+        stroke(255);
+    } else {
+        background(bgColor); //Original background color
+        stroke(strokeColor); //Original stroke color
+    }
+
+
     for(let i = 0; i < num; i ++) {
         let p = particles[i];
         point(p.x, p.y);
@@ -62,6 +77,11 @@ function draw() {
     //noiseSeed(millis());
 //}
 
+function mousePressed() {
+    //Toggle the color inversion state when the mouse is clicked
+    colorInverted = !colorInverted;
+}
+
 function onScreen(v) {
-    return v.x >= 0 && v.x >= 0 && v.y<= height;
+    return v.x >= 0 && v.x >= 0 && v.y <= height;
 }
