@@ -37,7 +37,7 @@ function setup() {
 }
 
 function resetParticles() {
-    particles = [];
+    particles = []
     for(let i = 0; i < num; i ++) {
         particles.push(createVector(random(width), random(height)));
     }
