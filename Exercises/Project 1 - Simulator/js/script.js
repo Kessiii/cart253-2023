@@ -21,7 +21,7 @@ function preload() {
 let particles = [];
 const num = 15000;
 let noiseScale = 0.003;
-const targetNoiseScale = 0.0015;
+const targetNoiseScale = 0.0045;
 const noiseChangeRate = 0.004;
 const repulsionRadius = 30
 
@@ -33,10 +33,13 @@ function setup() {
         particles.push(createVector(random(width), random(height)));
     }
     stroke(255);
+    noCursor();
 }
 
 function draw() {
     background(169, 144, 117, 10);
+    ellipse(mouseX, mouseY, 10, 10);
+    
 
     for (let i = 0; i < num; i++) {
         let p = particles[i];
@@ -73,12 +76,8 @@ function draw() {
             let a = TAU * n;
             p.x += cos(a);
             p.y += sin(a);
-
-          // Wrap particles around the canvas
-          //p.x = (p.x + width) % width;
-          //p.y = (p.y + height) % height;
   
-          ellipse(p.x, p.y, 2, 2);
+            ellipse(p.x, p.y, 2, 2);
     }
 
 
