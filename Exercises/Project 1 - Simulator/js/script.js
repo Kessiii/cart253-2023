@@ -26,7 +26,7 @@ const num = 15000;
 let noiseScale = 0.003;
 const targetNoiseScale = 0.0045;
 const noiseChangeRate = 0.004;
-const repulsionRadius = 40
+const repulsionRadius = 45
 
 let followCursor = false
 
@@ -43,6 +43,9 @@ function setup() {
 
 function draw() {
     background(169, 144, 117, 10);
+    image(cursorImage, mouseX, mouseY, 90, 90);
+    
+
     for (let i = 0; i < num; i++) {
         let p = particles[i];
 
@@ -81,7 +84,7 @@ function draw() {
   
             ellipse(p.x, p.y, 2, 2);
     }
-    image(cursorImage, mouseX, mouseY, 70, 70);
+
 
 }
 
