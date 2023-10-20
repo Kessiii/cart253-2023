@@ -10,8 +10,11 @@
 /**
  * Description of preload
 */
-function preload() {
 
+let cursorImage; //Declaring a variable to store the image
+
+function preload() {
+    cursorImage = loadImage('assets/images/cute-camel.png'); //loading my image
 }
 
 
@@ -23,24 +26,23 @@ const num = 15000;
 let noiseScale = 0.003;
 const targetNoiseScale = 0.0045;
 const noiseChangeRate = 0.004;
-const repulsionRadius = 30
+const repulsionRadius = 40
 
 let followCursor = false
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
+    background(169, 144, 117, 10);
     for (let i = 0; i < num; i++) {
         particles.push(createVector(random(width), random(height)));
     }
-    stroke(255);
+    noStroke();
     noCursor();
+    
 }
 
 function draw() {
     background(169, 144, 117, 10);
-    ellipse(mouseX, mouseY, 10, 10);
-    
-
     for (let i = 0; i < num; i++) {
         let p = particles[i];
 
@@ -50,7 +52,7 @@ function draw() {
             let distance = sqrt(dx * dx + dy * dy);
             if (distance < repulsionRadius) {
                 let angle = atan2(dy, dx);
-                let repulsion = map(distance, 0, repulsionRadius, 50, 1); // Adjust the repulsion strength
+                let repulsion = map(distance, 0, repulsionRadius, 10, 10); // Adjust the repulsion strength
                 p.x += cos(angle) * repulsion;
                 p.y += sin(angle) * repulsion;
         }
@@ -79,7 +81,7 @@ function draw() {
   
             ellipse(p.x, p.y, 2, 2);
     }
-
+    image(cursorImage, mouseX, mouseY, 70, 70);
 
 }
 
