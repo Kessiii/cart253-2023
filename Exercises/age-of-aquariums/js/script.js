@@ -18,10 +18,6 @@ function preload() {
 
 //let us set up our fishes!
 let school = []; //setting up an empty array
-let fish1;
-let fish2;
-let fish3;
-let fish4;
 
 /**
  * Description of setup
@@ -29,11 +25,9 @@ let fish4;
 function setup() {
   createCanvas(600, 600);
 
-  //Time to position the fishes anywhere
-  school[0] = createFish(random(0, width), random(0, height));
-  school[1] = createFish(random(0, width), random(0, height));
-  school[2] = createFish(random(0, width), random(0, height));
-  school[3] = createFish(random(0, width), random(0, height));
+  for (let i = 0; i < 4; i++) {
+    school[i] = createFish(random(0, width), random (0, height));
+  }
 }
 
 //CreateFish(x, y)
@@ -45,7 +39,7 @@ function createFish(x, y) {
     size: 50,
     targetX: x,
     targetY: y,
-    ease: 0.008 
+    ease: 0.003 
   };
   return fish;
 }
@@ -67,7 +61,7 @@ function draw() {
 //This chooses whether the provided fish changes direction and moves it
 function moveFish(fish) {
   let change = random(0, 1);
-  if (change < 0.1) {
+  if (change < 0.5) {
     fish.targetX = random(0, width);
     fish.targetY = random(0, height);
   }
@@ -91,4 +85,9 @@ function displayFish(fish) {
   noStroke();
   ellipse(fish.x, fish.y, fish.size);
   pop();
+}
+
+function mousePressed() {
+  let fish = createFish(mouseX, mouseY);
+  school.push(fish);
 }
