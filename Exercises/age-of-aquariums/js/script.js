@@ -17,6 +17,7 @@ function preload() {
 }
 
 //let us set up our fishes!
+let school = []; //setting up an empty array
 let fish1;
 let fish2;
 let fish3;
@@ -29,10 +30,10 @@ function setup() {
   createCanvas(600, 600);
 
   //Time to position the fishes anywhere
-  fish1 = createFish(random(0, width), random(0, height));
-  fish2 = createFish(random(0, width), random(0, height));
-  fish3 = createFish(random(0, width), random(0, height));
-  fish4 = createFish(random(0, width), random(0, height));
+  school[0] = createFish(random(0, width), random(0, height));
+  school[1] = createFish(random(0, width), random(0, height));
+  school[2] = createFish(random(0, width), random(0, height));
+  school[3] = createFish(random(0, width), random(0, height));
 }
 
 //CreateFish(x, y)
@@ -44,7 +45,7 @@ function createFish(x, y) {
     size: 50,
     targetX: x,
     targetY: y,
-    ease: 0.001 
+    ease: 0.008 
   };
   return fish;
 }
@@ -56,15 +57,10 @@ function createFish(x, y) {
 function draw() {
   background (0);
 
-  moveFish(fish1);
-  moveFish(fish2);
-  moveFish(fish3);
-  moveFish(fish4);
-
-  displayFish(fish1);
-  displayFish(fish2);
-  displayFish(fish3);
-  displayFish(fish4);
+  for (let i = 0; i < 4; i++) {
+    moveFish(school[i]);
+    displayFish(school[i]);
+  }
 }
 
 //moveFish(fish)
