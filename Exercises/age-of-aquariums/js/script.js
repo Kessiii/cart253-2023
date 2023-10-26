@@ -28,7 +28,6 @@ function setup() {
 
   for (let i = 0; i < schoolSize; i++) {
     school[i] = createFish(random(0, width), random(0, height));
-    school.push(fish);
   }
 }
 
@@ -53,7 +52,7 @@ function createFish(x, y) {
 function draw() {
   background (0);
 
-  for (let i = 0; i < school.lenght; i++) {
+  for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
     displayFish(school[i]);
   }
