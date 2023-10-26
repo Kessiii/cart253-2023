@@ -18,6 +18,7 @@ function preload() {
 
 //let us set up our fishes!
 let school = []; //setting up an empty array
+let schoolSize = 4;
 
 /**
  * Description of setup
@@ -25,8 +26,9 @@ let school = []; //setting up an empty array
 function setup() {
   createCanvas(600, 600);
 
-  for (let i = 0; i < 4; i++) {
-    school[i] = createFish(random(0, width), random (0, height));
+  for (let i = 0; i < schoolSize; i++) {
+    school[i] = createFish(random(0, width), random(0, height));
+    school.push(fish);
   }
 }
 
@@ -37,9 +39,9 @@ function createFish(x, y) {
     x: x,
     y: y,
     size: 50,
-    targetX: x,
-    targetY: y,
-    ease: 0.003 
+    vx: 0,
+    vy: 0,
+    speed: 2,
   };
   return fish;
 }
@@ -51,7 +53,7 @@ function createFish(x, y) {
 function draw() {
   background (0);
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < school.lenght; i++) {
     moveFish(school[i]);
     displayFish(school[i]);
   }
@@ -62,15 +64,13 @@ function draw() {
 function moveFish(fish) {
   let change = random(0, 1);
   if (change < 0.5) {
-    fish.targetX = random(0, width);
-    fish.targetY = random(0, height);
+    fish.vx = random(-fish.speed, fish.speed);
+    fish.vy = random(-fish.speed, fish.speed);
   }
 
   //Smooth movements with ease factor
-  let dx = fish.targetX - fish.x;
-  let dy = fish.targetY - fish.y;
-  fish.x += dx * fish.ease;
-  fish.y += dy * fish.ease;
+  fish.x = fish.x + fish.vx;
+  fish.y = fish.y + fish.vy; 
 
   //Constrain the fish to the Canvas
   fish.x = constrain(fish.x, 0, width);
