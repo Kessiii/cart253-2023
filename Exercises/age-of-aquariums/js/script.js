@@ -18,7 +18,7 @@ function preload() {
 
 //let us set up our fishes!
 let school = []; //setting up an empty array
-let schoolSize = 4;
+let schoolSize = 9;
 
 /**
  * Description of setup
@@ -40,7 +40,7 @@ function createFish(x, y) {
     size: 50,
     vx: 0,
     vy: 0,
-    speed: 2,
+    speed: 1,
   };
   return fish;
 }
@@ -92,5 +92,5 @@ function displayFish(fish) {
 
 function mousePressed() {
   let fish = createFish(mouseX, mouseY);
-  school.push(fish);
+
 }
