@@ -8,104 +8,105 @@
 
 "use strict";
 
-// Our user, to move with the mouse
-    let user = {
-        x: 0,
-        y: 0,
-        size: 100
-    };
+/**
+ * Description of preload
+*/
+function preload() {
 
-// Food objects
-let food1;
-let food2;
-let food3;
-let food4;
-let food5;
-let food6;
+}
+
+
+let cols, rows;
+let scl = 20;
+let w = 600;
+let h = 400;
+let particles = [];
+let flowfield;
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(w, h);
+  cols = floor(w / scl);
+  rows = floor(h / scl);
+  flowfield = new Array(cols * rows);
 
-      food1 = createFood(50, 300);
-      food2 = createFood(150, 300);
-      food3 = createFood(250, 300);
-      food4 = createFood(350, 300);
-      food5 = createFood(450, 300);
-      food6 = createFood(550, 300);
-      };
-
-
-function createFood(x,y) {
-  let food = {
-    x: x,
-    y: y,
-    size: 50,
-    eaten: false
-  };
-  return food;
+  for (let i = 0; i < 100; i++) {
+    particles[i] = new Particle();
+  }
+  background(150);
 }
 
 function draw() {
-  background(0);
-
-  // Move the user (with the mouse)
-  moveUser();
-
-  // Check whether the user has eaten either food
-  checkFood(food1);
-  checkFood(food2);
-  checkFood(food3);
-  checkFood(food4);
-  checkFood(food5);
-  checkFood(food6);
-
-// Display the user and foods
-displayUser();
-displayFood(food1);
-displayFood(food2);
-displayFood(food3);
-displayFood(food4);
-displayFood(food5);
-displayFood(food6);
-};
-
-
-
-
-      
-
-// Sets the user position to the mouse position
-function moveUser() {
-  user.x = mouseX;
-  user.y = mouseY;
-}
-
-// Checks if the user overlaps the food object and eats it if so
-function checkFood(food) {
-  if (!food.eaten) {
-  let d = dist(user.x, user.y, food.x, food.y);
-  if (d < user.size / 2 + food.size / 2) {
-    food.eaten = true;
-        }
+  // Calculate and update the flow field
+  let yoff = 0;
+  for (let y = 0; y < rows; y++) {
+    let xoff = 0;
+    for (let x = 0; x < cols; x++) {
+      let index = x + y * cols;
+      let angle = noise(xoff, yoff, frameCount * 0.01) * TWO_PI * 2;
+      let v = p5.Vector.fromAngle(angle);
+      v.setMag(1);
+      flowfield[index] = v;
+      xoff += 0.1;
+      stroke(0, 50);
+      // Uncomment the line below to visualize the flow field vectors
+      // line(x * scl, y * scl, x * scl + v.x * 10, y * scl + v.y * 10);
     }
-}
-
-// Draw the user as a circle
-function displayUser() {
-push();
-fill(255);
-ellipse(user.x, user.y, user.size);
-pop();
-}
-
-// Draw the food as a circle
-function displayFood(food){
-  // Check if the food is still available to be eaten
-  if (!food.eaten) {
-    // Display the food as its position and with its size
-        push();
-        fill(255, 100, 100);
-        ellipse(food.x, food.y, food.size);
-        pop();
+    yoff += 0.1;
   }
-};
+
+  // Update and display particles
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].follow(flowfield);
+    particles[i].update();
+    particles[i].edges();
+    particles[i].show();
+  }
+}
+
+class Particle {
+  constructor() {
+    this.pos = createVector(random(width), random(height));
+    this.vel = createVector(0, 0);
+    this.acc = createVector(0, 0);
+    this.maxspeed = 4;
+    this.prevPos = this.pos.copy();
+  }
+
+  update() {
+    this.vel.add(this.acc);
+    this.vel.limit(this.maxspeed);
+    this.pos.add(this.vel);
+    this.acc.mult(0);
+  }
+
+  applyForce(force) {
+    this.acc.add(force);
+  }
+
+  follow(flow) {
+    let x = floor(this.pos.x / scl);
+    let y = floor(this.pos.y / scl);
+    let index = x + y * cols;
+    let force = flow[index];
+    this.applyForce(force);
+  }
+
+  show() {
+    stroke(255, 0, 0, 150);
+    strokeWeight(2);
+    line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+    this.updatePrev();
+  }
+
+  updatePrev() {
+    this.prevPos.x = this.pos.x;
+    this.prevPos.y = this.pos.y;
+  }
+
+  edges() {
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
+  }
+}
