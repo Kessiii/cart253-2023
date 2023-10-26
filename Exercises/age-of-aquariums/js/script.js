@@ -42,9 +42,9 @@ function createFish(x, y) {
     x: x,
     y: y,
     size: 50,
-    vx: 0,
-    vy: 0,
-    speed: 2
+    targetX: x,
+    targetY: y,
+    ease: 0.001 
   };
   return fish;
 }
@@ -71,14 +71,16 @@ function draw() {
 //This chooses whether the provided fish changes direction and moves it
 function moveFish(fish) {
   let change = random(0, 1);
-  if (change < 0.5) {
-    fish.vx = random(-fish.speed, fish.speed);
-    fish.vy = random(-fish.speed, fish.speed);
+  if (change < 0.1) {
+    fish.targetX = random(0, width);
+    fish.targetY = random(0, height);
   }
 
-  //Moving the fishes
-  fish.x = fish.x + fish.vx;
-  fish.y = fish.y + fish.vy;
+  //Smooth movements with ease factor
+  let dx = fish.targetX - fish.x;
+  let dy = fish.targetY - fish.y;
+  fish.x += dx * fish.ease;
+  fish.y += dy * fish.ease;
 
   //Constrain the fish to the Canvas
   fish.x = constrain(fish.x, 0, width);
