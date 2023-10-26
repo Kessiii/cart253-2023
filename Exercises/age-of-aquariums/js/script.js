@@ -63,8 +63,12 @@ function draw() {
 function moveFish(fish) {
   let change = random(0, 1);
   if (change < 0.5) {
-    fish.vx = random(-fish.speed, fish.speed);
-    fish.vy = random(-fish.speed, fish.speed);
+
+  // Adding lerp to gradually change the velocity
+  let targetVX = random(-fish.speed, fish.speed);
+  let targetVY = random(-fish.speed, fish.speed);
+    fish.vx = lerp(fish.vx, targetVX, 0.2);
+    fish.vy = lerp(fish.vy, targetVY, 0.2);
   }
 
   //Smooth movements with ease factor
