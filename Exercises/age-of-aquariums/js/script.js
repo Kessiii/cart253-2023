@@ -10,6 +10,10 @@
 let customCursor;
 let pirahna;
 let treasure;
+let treasureX = 500;
+let treasureY = 500;
+let treasureSize = 90
+let state = "play" //setting up initial state
 /**
  * Description of preload
 */
@@ -58,12 +62,17 @@ function createFish(x, y) {
 function draw() {
   background (0, 0, 255);
 
-  image(treasure, 500, 500, 90, 90);
+
+  if (state === "play") {
+  image(treasure, treasureX, treasureY, treasureSize, treasureSize);
   image(customCursor, mouseX, mouseY, 90, 60);
 
   for (let i = 0; i < school.length; i++) {
-    moveFish(school[i]);
-    displayFish(school[i]);
+      moveFish(school[i]);
+      displayFish(school[i]);
+    }
+  }else if (state === "loot") {
+    background(255, 255, 0) //this indicates the loot has been touched
   }
 }
 
@@ -100,6 +109,11 @@ function displayFish(fish) {
 }
 
 function mousePressed() {
-  let fish = createFish(mouseX, mouseY);
+  let d = dist(mouseX, mouseY, treasureX, treasureY);
+  if (d < treasureSize / 2) {
+    state = "loot"
+  }
 
 }
+
+
