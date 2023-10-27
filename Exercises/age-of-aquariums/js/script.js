@@ -14,6 +14,9 @@ let treasureX = 500;
 let treasureY = 500;
 let treasureSize = 90
 let state = "play" //setting up initial state
+
+let lootText = "Treasure looted!";
+let loveText = "They never wanted to bite... All they wanted was your love!"
 /**
  * Description of preload
 */
@@ -25,7 +28,7 @@ function preload() {
 
 //let us set up our fishes!
 let school = []; //setting up an empty array
-let schoolSize = 9;
+let schoolSize = 30;
 
 
 /**
@@ -71,8 +74,18 @@ function draw() {
       moveFish(school[i]);
       displayFish(school[i]);
     }
-  }else if (state === "loot") {
+  } else if (state === "loot") {
     background(255, 255, 0) //this indicates the loot has been touched
+    textSize(32); // Set the text size
+    fill(0); // Set text color
+    text(lootText, width / 2 - 100, height / 2); // Display loot text
+  } else if (state === "love") {
+    background(255, 0, 0); // Change the background to indicate the love state
+    textSize(32); // Set the text size
+    fill(255); // Set text color
+    textAlign(CENTER,CENTER);
+    text(`They did not even bite you...
+    All they wanted was your love`, width / 2 - 100, height / 2); // Display love text
   }
 }
 
@@ -108,10 +121,18 @@ function displayFish(fish) {
   pop();
 }
 
-function mousePressed() {
+function mouseMoved() {
   let d = dist(mouseX, mouseY, treasureX, treasureY);
   if (d < treasureSize / 2) {
     state = "loot"
+  }
+
+  for (let i = 0; i < school.length; i++) {
+    let dPiranha = dist(mouseX, mouseY, school[i].x, school[i].y);
+    if (dPiranha < school[i].size / 2) {
+      state = "love"; // Change the state to "love" when a piranha is clicked
+      break; // Exit the loop after changing state
+    }
   }
 
 }
