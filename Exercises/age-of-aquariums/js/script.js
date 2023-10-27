@@ -12,8 +12,8 @@ let pirahna;
 let treasure;
 let treasureX = 500;
 let treasureY = 500;
-let treasureSize = 90
-let state = "play" //setting up initial state
+let treasureSize = 90;
+let state = "welcome"; //setting up the welcome screen
 
 let lootText = "Treasure looted!";
 let loveText = "They never wanted to bite... All they wanted was your love!"
@@ -63,10 +63,19 @@ function createFish(x, y) {
  * Moves and Display the fishes & draws the background
 */
 function draw() {
+
+  if (state === "welcome") {
+    background(0, 255, 0); // Green welcome screen
+    textSize(32); // Set the text size
+    fill(0); // Set text color
+    textAlign(CENTER,CENTER);
+    text(`Welcome... You found a treasure in a lake 
+    INFESTED with piranhas, try and 
+    get it to gain riches!
+    CLICK AND RETRIEVE`, width / 2, height / 2);
+  } else if (state === "play") {
   background (0, 0, 255);
 
-
-  if (state === "play") {
   image(treasure, treasureX, treasureY, treasureSize, treasureSize);
   image(customCursor, mouseX, mouseY, 90, 60);
 
@@ -87,7 +96,7 @@ function draw() {
     text(`They did not even bite you...
     All they wanted was your love`, width / 2 - 100, height / 2); // Display love text
   }
-}
+
 
 //moveFish(fish)
 //This chooses whether the provided fish changes direction and moves it
@@ -122,19 +131,25 @@ function displayFish(fish) {
 }
 
 function mouseMoved() {
-  let d = dist(mouseX, mouseY, treasureX, treasureY);
-  if (d < treasureSize / 2) {
-    state = "loot"
-  }
-
-  for (let i = 0; i < school.length; i++) {
-    let dPiranha = dist(mouseX, mouseY, school[i].x, school[i].y);
-    if (dPiranha < school[i].size / 2) {
-      state = "love"; // Change the state to "love" when a piranha is clicked
-      break; // Exit the loop after changing state
+  if (state === "welcome") {
+    state = "play"; // Change the state to "play" when clicking on the welcome screen
+  } else if (state === "play") {
+    // Check if the mouse click is within the treasure's area
+    let d = dist(mouseX, mouseY, treasureX, treasureY);
+    if (d < treasureSize / 2) {
+      state = "loot"; // Change the state to "loot" when the treasure is clicked
     }
+
+    // Check if the mouse click touches a piranha
+    for (let i = 0; i < school.length; i++) {
+      let dPiranha = dist(mouseX, mouseY, school[i].x, school[i].y);
+      if (dPiranha < school[i].size / 2) {
+        state = "love"; // Change the state to "love" when a piranha is clicked
+        break; // Exit the loop after changing state
+      }
+    }
+  } else {
+    state = "play"; // Return to the "play" state from "love" or "loot" when clicking anywhere else
   }
-
 }
-
-
+}
