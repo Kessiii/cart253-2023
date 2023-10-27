@@ -8,13 +8,13 @@
 
 "use strict";
 let customCursor;
-
+let pirahna;
 /**
  * Description of preload
 */
 function preload() {
   customCursor = loadImage('assets/images/hand.png')
-  customCursor.resize(10, 0);
+  fish = loadImage('assets/images/pirahna.png')
 }
 
 //let us set up our fishes!
@@ -56,7 +56,7 @@ function createFish(x, y) {
 function draw() {
   background (0);
 
-  image(customCursor, mouseX, mouseY);
+  image(customCursor, mouseX, mouseY, 90, 60);
 
   for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
