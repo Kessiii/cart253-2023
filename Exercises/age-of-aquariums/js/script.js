@@ -9,12 +9,14 @@
 "use strict";
 let customCursor;
 let pirahna;
+let treasure;
 /**
  * Description of preload
 */
 function preload() {
-  customCursor = loadImage('assets/images/hand.png')
-  fish = loadImage('assets/images/pirahna.png')
+  customCursor = loadImage('assets/images/hand.png');
+  pirahna = loadImage('assets/images/pirahna.png');
+  treasure = loadImage('assets/images/treasure.png');
 }
 
 //let us set up our fishes!
@@ -26,7 +28,7 @@ let schoolSize = 9;
  * Description of setup
 */
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(800, 800);
   imageMode(CENTER);
   noCursor();
 
@@ -41,10 +43,10 @@ function createFish(x, y) {
   let fish = {
     x: x,
     y: y,
-    size: 50,
+    size: 80,
     vx: 0,
     vy: 0,
-    speed: 1,
+    speed: 15,
   };
   return fish;
 }
@@ -54,8 +56,9 @@ function createFish(x, y) {
  * Moves and Display the fishes & draws the background
 */
 function draw() {
-  background (0);
+  background (0, 0, 255);
 
+  image(treasure, 500, 500, 90, 90);
   image(customCursor, mouseX, mouseY, 90, 60);
 
   for (let i = 0; i < school.length; i++) {
@@ -92,7 +95,7 @@ function displayFish(fish) {
   push();
   fill(200, 100, 100);
   noStroke();
-  ellipse(fish.x, fish.y, fish.size);
+  image(pirahna, fish.x, fish.y, fish.size, fish.size);
   pop();
 }
 
