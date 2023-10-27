@@ -24,13 +24,13 @@ function preload() {
 }
 
 let school = [];
-let schoolSize = 30;
+let schoolSize = 40;
 
 function createFish(x, y) {
   let fish = {
     x: x,
     y: y,
-    size: 80,
+    size: random(sizeRange.min, sizeRange.max), //Random initial size!
     vx: 0,
     vy: 0,
     speed: 15,
@@ -38,12 +38,17 @@ function createFish(x, y) {
   return fish;
 }
 
+let sizeRange = {
+  min: 40, // Minimum size
+  max: 100, // Maximum size
+};
+
 function setup() {
   createCanvas(800, 800);
   imageMode(CENTER);
 
   for (let i = 0; i < schoolSize; i++) {
-    school[i] = createFish(random(0, width), random(0, height));
+    school[i] = createFish(random(0, width), random(0, height), sizeRange);
   }
 }
 
@@ -78,7 +83,8 @@ function draw() {
     fill(255);
     textAlign(CENTER, CENTER);
     text(`They did not even bite you...
-    All they wanted was your love`, width / 2 - 100, height / 2);
+    All they wanted was your love
+    Now click and try again dear.`, width / 2 - 100, height / 2);
   }
 }
 
@@ -90,6 +96,9 @@ function moveFish(fish) {
     fish.vx = lerp(fish.vx, targetVX, 0.2);
     fish.vy = lerp(fish.vy, targetVY, 0.2);
   }
+
+  // Randomly change the fish's size within the specified range
+  fish.size = constrain(fish.size + random(-5, 5), sizeRange.min, sizeRange.max);
 
   fish.x = fish.x + fish.vx;
   fish.y = fish.y + fish.vy;
