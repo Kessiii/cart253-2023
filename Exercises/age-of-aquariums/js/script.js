@@ -16,7 +16,6 @@ let treasureSize = 90;
 let state = "welcome"; //setting up the welcome screen
 
 let lootText = "Treasure looted!";
-let loveText = "They never wanted to bite... All they wanted was your love!"
 /**
  * Description of preload
 */
@@ -72,6 +71,7 @@ function draw() {
     text(`Welcome... You found a treasure in a lake 
     INFESTED with piranhas, try and 
     get it to gain riches!
+
     CLICK AND RETRIEVE`, width / 2, height / 2);
   } else if (state === "play") {
   background (0, 0, 255);
@@ -152,4 +152,12 @@ function mouseMoved() {
     state = "play"; // Return to the "play" state from "love" or "loot" when clicking anywhere else
   }
 }
+
+function mouseClicked() {
+  if (state === "welcome") {
+    state = "play"; // Transition to "play" state on click
+  } else if (state === "loot" || state === "love") {
+    state = "welcome"; // Transition back to "welcome" from loot or love state on click
+    }
+  }
 }
