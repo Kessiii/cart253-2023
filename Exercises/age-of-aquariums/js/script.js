@@ -7,24 +7,28 @@
  */
 
 "use strict";
-
+let customCursor;
 
 /**
  * Description of preload
 */
 function preload() {
-
+  customCursor = loadImage('assets/images/hand.png')
+  customCursor.resize(10, 0);
 }
 
 //let us set up our fishes!
 let school = []; //setting up an empty array
 let schoolSize = 9;
 
+
 /**
  * Description of setup
 */
 function setup() {
   createCanvas(600, 600);
+  imageMode(CENTER);
+  noCursor();
 
   for (let i = 0; i < schoolSize; i++) {
     school[i] = createFish(random(0, width), random(0, height));
@@ -51,6 +55,8 @@ function createFish(x, y) {
 */
 function draw() {
   background (0);
+
+  image(customCursor, mouseX, mouseY);
 
   for (let i = 0; i < school.length; i++) {
     moveFish(school[i]);
