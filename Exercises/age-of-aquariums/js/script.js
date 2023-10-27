@@ -15,7 +15,8 @@ let treasureY = 500;
 let treasureSize = 90;
 let state = "welcome";
 
-let lootText = "Treasure looted!";
+let school = [];
+let schoolSize = 40;
 
 function preload() {
   customCursor = loadImage('assets/images/hand.png');
@@ -23,9 +24,7 @@ function preload() {
   treasure = loadImage('assets/images/treasure.png');
 }
 
-let school = [];
-let schoolSize = 40;
-
+//Let's create our fishes! 
 function createFish(x, y) {
   let fish = {
     x: x,
@@ -62,21 +61,22 @@ function draw() {
     INFESTED with piranhas, try and 
     get it to gain riches!
     CLICK AND RETRIEVE`, width / 2, height / 2);
+
   } else if (state === "play") {
     background(0, 0, 255);
-
     image(treasure, treasureX, treasureY, treasureSize, treasureSize);
     image(customCursor, mouseX, mouseY, 90, 60);
-
     for (let i = 0; i < school.length; i++) {
       moveFish(school[i]);
       displayFish(school[i]);
     }
+
   } else if (state === "loot") {
     background(255, 255, 0);
     textSize(32);
     fill(0);
-    text(lootText, width / 2 - 100, height / 2);
+    text(`Treasure looted!`, width / 2 - 100, height / 2);
+    
   } else if (state === "love") {
     background(255, 0, 0);
     textSize(32);
