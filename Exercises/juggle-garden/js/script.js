@@ -49,9 +49,11 @@ function draw() {
     
     for (let i = 0; i < balls.length; i++) {
         let ball = balls [i];
+        if (ball.active) {
         ball.gravity(gravityForce);
         ball.move();
-        ball.bounce();
+        ball.bounce(paddle);
         ball.display();
+        }
     }
 }
