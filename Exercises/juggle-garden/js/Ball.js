@@ -27,7 +27,7 @@ class Ball {
         this.y = this.y + this.vy;
     }
 
-    bounce() {
+    bounce(paddle) {
         if (this.y + this.size/2 >= height) {
             this.vy = -this.vy;
             this.ay = 0;
