@@ -39,7 +39,7 @@ function setup() {
 }
 
 function draw() {
-    background(0);
+    background(25,25,112);
 
     paddle.move();
     paddle.display();
