@@ -16,10 +16,12 @@ let balls = [];
 let numBalls = 10;
 let paddle;
 let paddleImage; // Variable to hold the custom paddle image
+let ballImage; 
 
 function preload() {
     // Load the custom paddle image
     paddleImage = loadImage('assets/images/running.png');
+    ballImage = loadImage('assets/images/meteor.png');
 }
 
 function setup() {
@@ -30,7 +32,7 @@ function setup() {
         let x = random(0, width);
         let y = random(-400, -100);
         let ball = new Ball(x, y);
-        balls.push(ball);
+        balls.push(ballImage);
     }
 }
 
