@@ -13,7 +13,7 @@
 */
 let gravityForce = 0.0025;
 let balls = [];
-let numBalls = 10;
+let numBalls = 20;
 let paddle;
 let paddleImage; // Variable to hold the custom paddle image
 let ballImage; 
@@ -27,12 +27,14 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     paddle = new Paddle(paddleImage);
+    let ball = new Ball(random(0, width), random(-400, -100), ballImage);
+
 
     for (let i = 0; i < numBalls; i++) {
         let x = random(0, width);
         let y = random(-400, -100);
-        let ball = new Ball(x, y);
-        balls.push(ballImage);
+        let ball = new Ball(x, y, ballImage); // Pass the ballImage to the Ball constructor
+        balls.push(ball); // Push the ball object, not the image
     }
 }
 
