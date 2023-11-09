@@ -31,19 +31,16 @@ class Ball {
         }
     }
 
-    // Updated bounce method to handle collisions
-    bounce(paddle, gameState) {
+    bounce(paddle) {
         if (this.x > paddle.x - paddle.width / 2 && this.x < paddle.x + paddle.width / 2 && this.y + this.size / 2 > paddle.y - paddle.height / 2 && this.y - this.size / 2 < paddle.y + paddle.height / 2) {
             // Bounce
             let dx = this.x - paddle.x;
             this.vx = this.vx + map(dx, -paddle.width / 2, paddle.width / 2, -2, 2);
             this.vy = -this.vy;
             this.ay = 0;
-
-            if (gameState === "playing") {
-                gameState = "burned"; // Change the game state to "burned" if there's a collision
-            }
+            return true; // Return true when a bounce occurs
         }
+        return false; // Return false when no bounce occurs
     }
 
     display() {
