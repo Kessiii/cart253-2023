@@ -74,7 +74,8 @@ function draw() {
         textSize(32);
         textAlign(CENTER, CENTER);
         fill(255);
-        text("You've been burned by the meteors! Or the flamming burger patties...", width / 2, height / 2);
+        text(`You've been burned by the meteors! 
+        Or the burnings burger patties...`, width / 2, height / 2);
     }
 }
 
