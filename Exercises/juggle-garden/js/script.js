@@ -17,6 +17,8 @@ let numBalls = 20;
 let paddle;
 let paddleImage; // Variable to hold the custom paddle image
 let ballImage; 
+let gameIsOver = false; //Variable to track game state
+let survivalMessage = "You survived"; // End screen message
 
 function preload() {
     // Load the custom paddle image
@@ -51,6 +53,19 @@ function draw() {
             ball.move();
             ball.bounce(paddle);
             ball.display();
+
+            if (paddle,hits(ball)) {
+                //Ball touches the paddle
+                gameIsOver = true; // Set game state to over
+            }
         }
+    }
+
+    if (gameIsOver) {
+        // Display end screen with the "You Survived" message
+        textAlign(CENTER,CENTER);
+        textSize(48);
+        fill(255);
+        text(survivalMessage, width / 2, height / 2);
     }
 }

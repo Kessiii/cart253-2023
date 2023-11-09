@@ -9,7 +9,7 @@ class Ball {
         this.maxSpeed = 8;
         this.size = 40;
         this.active = true;
-        this.image = ballImage; // Assign the ball image
+        this.image = img; // Assign the ball image
     }
 
     gravity(force) {
@@ -31,13 +31,15 @@ class Ball {
         }
     }
 
-    bounce(paddle) {
-        if (this.x > paddle.x - paddle.width / 2 && this.x < paddle.x + paddle.width / 2 && this.y + this.size / 2 > paddle.y - paddle.height / 2 && this.y - this.size / 2 < paddle.y + paddle.height / 2) {
-            // Bounce
-            let dx = this.x - paddle.x;
-            this.vx = this.vx + map(dx, -paddle.width / 2, paddle.width / 2, -2, 2);
-            this.vy = -this.vy;
-            this.ay = 0;
+    bounce(paddle, gameIsOver) {
+        if (!gameIsOver) { // Check if the game is not over
+            if (this.x > paddle.x - paddle.width / 2 && this.x < paddle.x + paddle.width / 2 && this.y + this.size / 2 > paddle.y - paddle.height / 2 && this.y - this.size / 2 < paddle.y + paddle.height / 2) {
+                // Bounce
+                let dx = this.x - paddle.x;
+                this.vx = this.vx + map(dx, -paddle.width / 2, paddle.width / 2, -2, 2);
+                this.vy = -this.vy;
+                this.ay = 0;
+            }
         }
     }
 
