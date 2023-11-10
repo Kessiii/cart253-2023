@@ -1,9 +1,8 @@
 /**
- * Title of Project
- * Author Name
+ * Star-Crossed Lovers
+ * Kestrel Villapando
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * Should you ask your lover to be your boyfriend? Even if he is working for the competition?
  */
 
 "use strict";
