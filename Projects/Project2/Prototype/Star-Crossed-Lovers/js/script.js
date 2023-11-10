@@ -24,7 +24,7 @@ function preload() {
 */
 
 function setup() {
-    createCanvas(windowX, windowY);
+    createCanvas(windowWidth, windowHeight);
   noStroke();
   textFont("Arial");
   textSize(24);
