@@ -27,7 +27,7 @@ function setup() {
 //
 // Description of draw() goes here.
 function draw() {
-  background(0);
+  background(mouseX, mouseY);
 
   for (let i = 0; i < balls.length; i++) {
     let ball = balls[i];
