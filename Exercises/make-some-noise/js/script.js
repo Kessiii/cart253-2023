@@ -38,21 +38,21 @@ function draw() {
 }
 
 function mousePressed() {
-  createBall(mouseX,mouseY);
+  createMusicalBall(mouseX,mouseY);
 }
 
-function createBall(x,y) {
-  let note = random(notes);
-  let ball = new MusicalBall(x,y,note);
-  balls.push(ball);
-}
+//function createBall(x,y) {
+  //let note = random(notes);
+  //let ball = new MusicalBall(x,y,note);
+ // balls.push(ball);
+//}
 
 function createMusicalBall(x, y) {
       // Create different types of balls based on some condition (for example, random)
   let note = random(notes);
 
   // Define appearance properties
-  let ballSize = random(30, 60);
+  let ballSize = random();
   let ballColor = {
     r: random(100, 255),
     g: random(100, 255),

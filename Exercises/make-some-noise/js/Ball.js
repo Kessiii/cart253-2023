@@ -2,7 +2,7 @@ class MusicalBall {
     constructor(x, y, note) {
       this.x = x;
       this.y = y;
-      this.size = 50;
+      this.size = random(30, 90);
       this.fill = {
         r: random(200, 255),
         g: random(200, 255),
