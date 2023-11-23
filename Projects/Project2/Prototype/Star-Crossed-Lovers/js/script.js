@@ -13,26 +13,20 @@
 
 let state = `title`; //0 for beginning, 1 for game, 2 for end
 
+
 function preload() {
 
 }
 
-
-/**
- * Description of setup
-*/
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
 
 
-/**
- * Description of draw()
-*/
 function draw() {
-  background(state === `title` ? "green" : "pink");
-  fill(255);
+  background(0);
+
   if (state === `title`) {
     title();
   } else if (state === `game`) {
@@ -52,12 +46,8 @@ function title() {
 }
 
 function game() {
-  push();
-  textSize(20);
-  fill(255,150,150);
-  textAlign(CENTER,CENTER);
-  text(`RUN FOREST RUN!!`,width/2,height/2);
-  pop();
+  mountains();
+  mountainSetup();
 }
 
 function end() {
@@ -79,4 +69,27 @@ function mousePressed() {
   else if (state === `end`) {
     state = `title`;
   }
+}
+
+var close, rows;
+var scl = 20;
+var w = 1400;
+var h = 1000;
+
+
+
+function mountainSetup() {
+
+}
+
+function mountains() {
+  background(0);
+
+  for (var x = 0; x < close; x++) {
+    for (var y = 0 ; y < rows; y++) {
+      
+
+    }
+  }
+  
 }
