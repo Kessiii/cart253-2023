@@ -11,7 +11,7 @@
  * Description of preload
 */
 
-
+let state = `title`; // 
 
 function preload() {
 
@@ -31,27 +31,18 @@ function setup() {
  * Description of draw()
 */
 function draw() {
+  background(0);
 
-}
-
-function updateState() {
-    background(0);
-    fill(255);
-    if (state === `start`) {
+  if (state === `title`) {
       title();
   }
-  else if (state ===`game`) {
+  else if (state ===`simulation`) {
       simulation();
   }
   else if (state === `caught`) {
       caught();
   }
-  }
-  
-  function mousePressed() {
-    state = (state + 1) % 3; // Toggle between 0, 1, and 2
-    updateState();
-  }
+}
 
   function game() {
 
