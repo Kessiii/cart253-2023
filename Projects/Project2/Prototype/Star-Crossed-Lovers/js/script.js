@@ -11,7 +11,7 @@
  * Description of preload
 */
 
-let state = 0; //0 for beginning, 1 for game, 2 for end
+
 
 function preload() {
 
@@ -24,11 +24,6 @@ function preload() {
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
-  noStroke();
-  textFont("Arial");
-  textSize(24);
-  textAlign(CENTER, CENTER);
-  updateState();
 }
 
 
@@ -40,18 +35,24 @@ function draw() {
 }
 
 function updateState() {
-    background(state === 0 ? "green" : "pink");
+    background(0);
     fill(255);
-    if (state === 0) {
-      text("Insert comic here", width / 2, height / 2);
-    } else if (state === 1) {
-      text("Game is here", width / 2, height / 2);
-    } else {
-      text("End comic here", width / 2, height / 2);
-    }
+    if (state === `start`) {
+      title();
+  }
+  else if (state ===`game`) {
+      simulation();
+  }
+  else if (state === `caught`) {
+      caught();
+  }
   }
   
   function mousePressed() {
     state = (state + 1) % 3; // Toggle between 0, 1, and 2
     updateState();
+  }
+
+  function game() {
+
   }
