@@ -20,7 +20,9 @@ function preload() {
 
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+
+  mountainSetup();
+  mountains();
 }
 
 
@@ -81,9 +83,9 @@ var flying = 0;
 var terrain = [];
 
 function mountainSetup() {
-  createCanvas(900, 900, WEBGL);
-  cols = w / scl;
-  rows = h / scl;
+  createCanvas(windowWidth, windowHeight, WEBGL);
+ var cols = w / scl;
+ var rows = h / scl;
 
   for (var x = 0; x < cols; x++) {
     terrain[x] = [];
