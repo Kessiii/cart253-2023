@@ -25,8 +25,12 @@ let terrain = [];
 
 let cursorImg;
 
+var song;
+
+
 function preload() {
   cursorImg = loadImage('assets/images/felipe.png')
+  song = loadSound("gamesound");
 }
 
 function setup() {
@@ -93,6 +97,7 @@ function mousePressed() {
 }
 
 function mountainSetup() {
+  song.play();
   createCanvas(windowWidth, windowHeight, WEBGL);
   cols = w / scl;
   rows = h / scl;
@@ -107,7 +112,6 @@ function mountainSetup() {
 
 function mountainDraw() {
   cursor(cursorImg);
-
   flying -= 0.1;
   var yoff = flying;
   for (var y = 0; y < rows; y++) {
