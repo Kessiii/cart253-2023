@@ -23,6 +23,12 @@ let flying = 0;
 
 let terrain = [];
 
+let cursorImg;
+
+function preload() {
+  cursorImg = loadImage('../assets/images/felipe.png')
+}
+
 function setup() {
   mountainSetup();
 
@@ -100,6 +106,8 @@ function mountainSetup() {
 }
 
 function mountainDraw() {
+  cursor(cursorImg);
+
   flying -= 0.1;
   var yoff = flying;
   for (var y = 0; y < rows; y++) {
@@ -127,7 +135,7 @@ function mountainDraw() {
       vertex(x * scl, y * scl, terrain[x][y]);
       vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
     }
-    ambientLight(35 / rows * y, 0, 0);
+    ambientLight(90 / rows * y, 0, 0);
     ambientMaterial(255 / rows * y, 20, 200); //
 
     endShape();
