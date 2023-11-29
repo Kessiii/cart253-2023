@@ -25,12 +25,13 @@ let terrain = [];
 
 let cursorImg;
 
-var song;
-
+let song;
+let isSongPlaying = false;
 
 function preload() {
   cursorImg = loadImage('assets/images/felipe.png')
-  song = loadSound("gamesound");
+  song = loadSound("assets/sounds/gamesound.mp3");
+
 }
 
 function setup() {
@@ -52,8 +53,16 @@ function draw() {
   if (state === `title`) {
     title();
   } else if (state === `game`) {
+    if (!isSongPlaying) {
+      song.play() 
+      isSongPlaying = true
+    }
     game();
   } else if (state === `end`) {
+    if (isSongPlaying) {
+      song.stop() 
+      isSongPlaying = false
+    }
     end();
   }
 }
@@ -70,7 +79,7 @@ function title() {
 }
 
 function game() {
-  mountainDraw();
+  mountainDraw ();
 }
 
 function end() {
@@ -111,6 +120,8 @@ function mountainSetup() {
 }
 
 function mountainDraw() {
+
+
   cursor(cursorImg);
   flying -= 0.1;
   var yoff = flying;
