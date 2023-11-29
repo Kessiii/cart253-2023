@@ -53,7 +53,7 @@ function title() {
   _text.clear();
   background(217);
   noStroke();
-  _text.text("New Text " + Math.floor(Math.random() * 10), width/2, height/2);
+  _text.text("New Text ", width/2, height/2);
   texture(_text);
   plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
@@ -65,10 +65,12 @@ function game() {
 
 function end() {
   push();
-  textSize(20);
-  fill(255,150,150);
-  textAlign(CENTER,CENTER);
-  text(`end comic is here`,width/2,height/2);
+  _text.clear();
+  background(217);
+  noStroke();
+  _text.text("End Comic ", width/2, height/2);
+  texture(_text);
+  plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
 }
   
@@ -126,7 +128,7 @@ function mountainDraw() {
       vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
     }
     ambientLight(35 / rows * y, 0, 0);
-    ambientMaterial(255 / rows * y, 20, 200);
+    ambientMaterial(255 / rows * y, 20, 200); //
 
     endShape();
   }
