@@ -26,7 +26,7 @@ let terrain = [];
 let cursorImg;
 
 function preload() {
-  cursorImg = loadImage('../assets/images/felipe.png')
+  cursorImg = loadImage('assets/images/felipe.png')
 }
 
 function setup() {
