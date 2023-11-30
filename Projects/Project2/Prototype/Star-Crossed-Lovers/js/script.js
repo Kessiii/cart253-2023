@@ -151,10 +151,10 @@ function mountainDraw() {
     yoff += 0.2;
   }
 
-  ambientLight(90, 0, 0);
-  stroke(50, 40, 40, 100);
+  ambientLight(35, 0, 0);
+  stroke(50, 40, 40, 10);
   lights()
-  
+
   let locX = mouseX - width / 2;
   let locY = mouseY - height / 1.5 ;
   pointLight(255, 255, 255, locX, locY, 5);
