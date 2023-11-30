@@ -202,8 +202,18 @@ function mountainDraw() {
       pizzaSpeed += 0.1;
       pizzaCount++;
 
-      if (pizzaCount >= 5) {
+      if (pizzaCount >= 8) {
         state = `end`;
       }
   }
+}
+
+push();
+noCursor();
+noStroke();
+texture(cursorImg);
+translate(mouseX - width / 2, 150, 300);
+plane(80);
+pop();
+
 }
