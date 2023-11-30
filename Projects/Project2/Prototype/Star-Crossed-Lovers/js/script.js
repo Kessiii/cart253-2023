@@ -19,17 +19,25 @@ let scl = 20;
 let w = 1400;
 let h = 1000;
 
-let flying = 0;
+let flying = 0; //Speed of the mountain movements
 
 let terrain = [];
 
 let cursorImg;
+let pizzaImg; //Setting up the pizza image for the game. 
+let backgroundImg; //Setting up the background for the game part to set a scene.
+
+const pizzas = [];
+let pizzaSpeed = 0.1;
+let pizzaCount = 0
 
 let song;
 let isSongPlaying = false;
 
 function preload() {
-  cursorImg = loadImage('assets/images/felipe.png')
+  cursorImg = loadImage('../assets/images/felipe.png');
+  pizzaImg = loadImage('../assets/images/pizza.png');
+  backgroundImg = loadImage('../assets/images/bg.png');
   song = loadSound("assets/sounds/gamesound.mp3");
 
 }
