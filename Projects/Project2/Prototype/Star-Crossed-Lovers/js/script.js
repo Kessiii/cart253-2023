@@ -107,8 +107,7 @@ function mousePressed() {
   }
   else if (state === `game`) {
     state = `end`;
-  }
-  else if (state === `end`) {
+  }else if (state === `end`) {
     state = `title`;
   }
 }
