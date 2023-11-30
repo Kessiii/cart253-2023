@@ -51,7 +51,7 @@ function setup() {
   _text.textSize(50);
   _text.fill(255);
   _text.noStroke();
-  _text.text('Comic Starts Here', width * 0.5, height * 0.5);
+  _text.text('Comic Starts Here', width * 0.5, height * 0.5); //Text for beginning and end but WEBGL method. 
 }
 
 
@@ -80,7 +80,7 @@ function title() {
   _text.clear();
   background(217);
   noStroke();
-  _text.text("New Text ", width/2, height/2);
+  _text.text("Star Crossed Lover", width/2, height/2);
   texture(_text);
   plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
