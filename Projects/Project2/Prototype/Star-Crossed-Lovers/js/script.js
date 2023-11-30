@@ -127,11 +127,20 @@ function mountainSetup() {
   }
 }
 
+function spawnPizza() {
+  pizzas.push({
+    x: random(-windowWidth / 4, windowWidth / 4),
+    y: -550,
+    z: -1000,
+  });
+} //Spawning the pizza, the position and moving with the mountains. 
+
+
 function mountainDraw() {
+  background(0, 0, 0, 0);
 
-
-  cursor(cursorImg);
-  flying -= 0.1;
+  push();
+  flying -= 0.005 * deltaTime;
   var yoff = flying;
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
@@ -142,6 +151,10 @@ function mountainDraw() {
     yoff += 0.2;
   }
 
+  ambientLight(90, 0, 0);
+  stroke(50, 40, 40, 100);
+  lights()
+  
   let locX = mouseX - width / 2;
   let locY = mouseY - height / 1.5 ;
   pointLight(255, 255, 255, locX, locY, 5);
