@@ -159,11 +159,10 @@ function mountainDraw() {
   let locY = mouseY - height / 1.5 ;
   pointLight(255, 255, 255, locX, locY, 5);
 
-  background(0, 0, 255);
+
   translate(0, 50);
   rotateX(PI / 3);
 
-  // fill(200, 200, 200);
   translate(-w / 2, -h / 2);
   for (var y = 0; y < rows - 1; y++) {
     beginShape(TRIANGLE_STRIP);
@@ -172,8 +171,39 @@ function mountainDraw() {
       vertex(x * scl, (y + 1) * scl, terrain[x][y + 1]);
     }
     ambientLight(90 / rows * y, 0, 0);
-    ambientMaterial(255 / rows * y, 20, 200); //
+    ambientMaterial(255 - (255 / rows) * y, 20, 200); //
 
     endShape();
+  }
+  pop();
+
+  if (Math.random() < 0.01) {
+    spawnPizza();
+  }
+
+  for (let i = 0; i < pizzas.length; i++) {
+    const pizza = pizzas[i];
+    push();
+    noStroke();
+    translate(pizza.x, pizza.y, pizza.z);
+    texture(pizzaImg);
+    plane(50);
+    pop();
+    pizza.y += pizzaSpeed * deltaTime;
+    pizza.z += pizzaSpeed * 2 * deltaTime;
+
+    if (
+      pizza.z >= 290 &&
+      pizza.x < mouseX - width / 2 + 20 &&
+      pizza.x > mouseX - width / 2 - 20
+    ) {
+      console.log('pizza');
+      pizzas.splice(i, 1);
+      pizzaSpeed += 0.1;
+      pizzaCount++;
+
+      if (pizzaCount >= 5) {
+        state = `end`;
+      }
   }
 }
