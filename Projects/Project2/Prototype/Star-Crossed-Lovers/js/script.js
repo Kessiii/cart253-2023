@@ -8,10 +8,10 @@
 "use strict";
 
 /**
- * Description of preload
+ * Placement of all images and sounds for the game.
 */
 
-let state = `game`; //0 for beginning, 1 for game, 2 for end
+let state = `title`; //0 for beginning, 1 for game, 2 for end
 let _text;
 
 let cols, rows;
@@ -78,7 +78,7 @@ function draw() {
 function title() {
   push();
   _text.clear();
-  background(217);
+  background(191, 185, 8);
   noStroke();
   _text.text("Star Crossed Lover", width/2, height/2);
   texture(_text);
@@ -201,7 +201,7 @@ function mountainDraw() {
       pizzaSpeed += 0.1;
       pizzaCount++;
 
-      if (pizzaCount >= 8) {
+      if (pizzaCount >= 15) {
         state = `end`;
       }
   }
