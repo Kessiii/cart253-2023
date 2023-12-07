@@ -28,6 +28,7 @@ let pizzaImg; //Setting up the pizza image for the game.
 let backgroundImg; //Setting up the background for the game part to set a scene.
 let titleImg;
 let startImg;
+let endImg;
 
 const pizzas = [];
 let pizzaSpeed = 0.1;
@@ -42,7 +43,8 @@ function preload() {
   backgroundImg = loadImage('../assets/images/bg.png');
   song = loadSound("assets/sounds/gamesound.mp3");
   titleImg = createImg('../assets/images/intro.gif')
-  startImg = createImg('../assets/images/startcomic.gif')
+  startImg = createImg('../assets/images/startcomic.gif');
+  endImg = createImg('../assets/images/endcomic.gif');
 
 }
 
@@ -52,13 +54,10 @@ function setup() {
   _text = createGraphics(window.innerWidth - 4, window.innerHeight - 4);
   _text.textFont('Futura');
   _text.textAlign(CENTER);
-  _text.textSize(50);
+  _text.textSize(40);
   _text.fill(255);
   _text.noStroke();
   _text.text('Comic Starts Here', width * 0.5, height * 0.5); //Text for beginning and end but WEBGL method. 
-
-  startImg.hide();
-  titleImg.hide();
 }
 
 
@@ -66,6 +65,7 @@ function draw() {
   background(0);
   titleImg.hide();
   startImg.hide();
+  endImg.hide();
 
   if (state === `title`) {
     title();
@@ -91,7 +91,8 @@ function title() {
   _text.clear();
   background(191, 185, 8);
   noStroke();
-  _text.text("Click to Start", width/2, height/1.2);
+  _text.textAlign(CENTER);
+  _text.text("Click to Start ", width/2, height/1.2);
   texture(_text);
   plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
@@ -107,7 +108,8 @@ function startComic() {
   _text.clear();
   background(191, 185, 8);
   noStroke();
-  _text.text("Click to Start", width/2, height/1.2);
+  _text.textAlign(RIGHT);
+  _text.text("Click to Dream", width - 40, height - 40);
   texture(_text);
   plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
@@ -126,14 +128,15 @@ function end() {
   _text.clear();
   background(80, 80, 80);
   noStroke();
-  _text.text("Click to Start", width/2, height/1.2);
+  _text.textAlign(LEFT);
+  _text.text("Click to Restart", 40, height - 40);
   texture(_text);
   plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
 
-  startImg.show();
-  startImg.center()
-  startImg.size(700, AUTO); //positioning the title GIF
+  endImg.show();
+  endImg.center()
+  endImg.size(700, AUTO); //positioning the title GIF
 }
 
 function mousePressed() {
