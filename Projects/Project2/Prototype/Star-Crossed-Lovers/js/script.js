@@ -34,18 +34,20 @@ const pizzas = [];
 let pizzaSpeed = 0.1;
 let pizzaCount = 0
 
-let song;
-let isSongPlaying = false;
+let songs = [];
+let currentSong = 0;
+let lastSong = -1;
 
 function preload() {
   cursorImg = loadImage('../assets/images/felipe.png');
   pizzaImg = loadImage('../assets/images/pizza.png');
   backgroundImg = loadImage('../assets/images/bg.png');
-  song = loadSound("assets/sounds/gamesound.mp3");
   titleImg = createImg('../assets/images/intro.gif')
   startImg = createImg('../assets/images/startcomic.gif');
   endImg = createImg('../assets/images/endcomic.gif');
 
+  songs.push(loadSound("assets/sounds/welcomemusic.mp3"));
+  songs.push(loadSound("assets/sounds/gamesound.mp3"));
 }
 
 function setup() {
@@ -58,8 +60,17 @@ function setup() {
   _text.fill(255);
   _text.noStroke();
   _text.text('Comic Starts Here', width * 0.5, height * 0.5); //Text for beginning and end but WEBGL method. 
+
+  for (const song of songs) {
+    song.loop();
+  }
 }
 
+function switchSong(songIndex) {
+  if (currentSong == lastSong) {
+    currentSong = songIndex;
+  }
+}
 
 function draw() {
   background(0);
@@ -67,22 +78,25 @@ function draw() {
   startImg.hide();
   endImg.hide();
 
+  if (lastSong != currentSong) {
+    console.log(lastSong);
+    songs[lastSong]?.stop();
+    songs[currentSong].play();
+    lastSong = currentSong;
+  }
+
   if (state === `title`) {
     title();
+    switchSong(1);
   } else if (state === 'startComic') {
     startComic();
+    switchSong(0);
   } else if (state === `game`) {
-    if (!isSongPlaying) {
-      song.play() 
-      isSongPlaying = true
-    }
     game();
+    switchSong(1);
   } else if (state === `end`) {
-    if (isSongPlaying) {
-      song.stop() 
-      isSongPlaying = false
-    }
     end();
+    switchSong(0);
   }
 }
 
@@ -156,7 +170,6 @@ function mousePressed() {
 }
 
 function mountainSetup() {
-  song.play();
   createCanvas(windowWidth, windowHeight, WEBGL);
   cols = w / scl;
   rows = h / scl;
