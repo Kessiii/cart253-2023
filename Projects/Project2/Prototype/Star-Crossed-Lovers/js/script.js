@@ -26,11 +26,11 @@ let terrain = [];
 let cursorImg;
 let pizzaImg; //Setting up the pizza image for the game. 
 let backgroundImg; //Setting up the background for the game part to set a scene.
-let titleImg;
-let startImg;
-let endImg;
+let titleImg; //The Title animation
+let startImg; //The Start of the short comic
+let endImg; //The end comic
 
-const pizzas = [];
+const pizzas = []; //setting up the pizza part of the game 
 let pizzaSpeed = 0.1;
 let pizzaCount = 0
 
@@ -66,13 +66,13 @@ function setup() {
   }
 }
 
-function switchSong(songIndex) {
+function switchSong(songIndex) { //To force the different songs to play, preloading made it work half the time.
   if (currentSong == lastSong) {
     currentSong = songIndex;
   }
 }
 
-function draw() {
+function draw() {   //Setting up the images and forcing them to hide and appear when my code says so. 
   background(0);
   titleImg.hide();
   startImg.hide();
@@ -100,8 +100,8 @@ function draw() {
   }
 }
 
-function title() {
-  push();
+function title() { //Made a function to organize the Title screen. 
+  push(); 
   _text.clear();
   background(191, 185, 8);
   noStroke();
@@ -153,7 +153,8 @@ function end() {
   endImg.size(700, AUTO); //positioning the title GIF
 }
 
-function mousePressed() {
+function mousePressed() { 
+  //Made this to tell the code what to do when user presses and old for me to switch between states while coding. 
   if (state === `title`) {
     state = `startComic`;
   }
@@ -170,6 +171,7 @@ function mousePressed() {
 }
 
 function mountainSetup() {
+  //The creating of the mountain, to organize the multiple element into different function and to then group them up in the function game.
   createCanvas(windowWidth, windowHeight, WEBGL);
   cols = w / scl;
   rows = h / scl;
@@ -206,6 +208,7 @@ function mountainDraw() {
     yoff += 0.2;
   }
 
+  //I wanted to add light and effects on the mountain. 
   ambientLight(35, 0, 0);
   stroke(50, 40, 40, 10);
   lights()
@@ -236,6 +239,7 @@ function mountainDraw() {
     spawnPizza();
   }
 
+  //this is to set up the spawn of the pizza, made it random. And set a set amount of pizza to trigger the "end" state. 
   for (let i = 0; i < pizzas.length; i++) {
     const pizza = pizzas[i];
     push();
