@@ -27,6 +27,7 @@ let cursorImg;
 let pizzaImg; //Setting up the pizza image for the game. 
 let backgroundImg; //Setting up the background for the game part to set a scene.
 let titleImg;
+let startImg;
 
 const pizzas = [];
 let pizzaSpeed = 0.1;
@@ -41,6 +42,7 @@ function preload() {
   backgroundImg = loadImage('../assets/images/bg.png');
   song = loadSound("assets/sounds/gamesound.mp3");
   titleImg = createImg('../assets/images/intro.gif')
+  startImg = createImg('../assets/images/startcomic.gif')
 
 }
 
@@ -48,20 +50,27 @@ function setup() {
   mountainSetup();
 
   _text = createGraphics(window.innerWidth - 4, window.innerHeight - 4);
-  _text.textFont('Helvetica');
+  _text.textFont('Futura');
   _text.textAlign(CENTER);
   _text.textSize(50);
   _text.fill(255);
   _text.noStroke();
   _text.text('Comic Starts Here', width * 0.5, height * 0.5); //Text for beginning and end but WEBGL method. 
+
+  startImg.hide();
+  titleImg.hide();
 }
 
 
 function draw() {
   background(0);
+  titleImg.hide();
+  startImg.hide();
 
   if (state === `title`) {
     title();
+  } else if (state === 'startComic') {
+    startComic();
   } else if (state === `game`) {
     if (!isSongPlaying) {
       song.play() 
@@ -82,15 +91,30 @@ function title() {
   _text.clear();
   background(191, 185, 8);
   noStroke();
-  _text.text("Star Crossed Lover", width/2, height/2);
+  _text.text("Click to Start", width/2, height/1.2);
   texture(_text);
   plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
 
-  titleImg.position(CENTER)
-  titleImg.size(window.innerWidth, AUTO);
+  titleImg.show();
+  titleImg.size(700, AUTO); 
+  titleImg.center()
+  //positioning the title GIF
+}
 
+function startComic() {
+  push();
+  _text.clear();
+  background(191, 185, 8);
+  noStroke();
+  _text.text("Click to Start", width/2, height/1.2);
+  texture(_text);
+  plane(window.innerWidth - 4, window.innerHeight - 4);
+  pop();
 
+  startImg.show();
+  startImg.center()
+  startImg.size(700, AUTO); //positioning the title GIF
 }
 
 function game() {
@@ -100,21 +124,30 @@ function game() {
 function end() {
   push();
   _text.clear();
-  background(217);
+  background(80, 80, 80);
   noStroke();
-  _text.text("End Comic ", width/2, height/2);
+  _text.text("Click to Start", width/2, height/1.2);
   texture(_text);
   plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
+
+  startImg.show();
+  startImg.center()
+  startImg.size(700, AUTO); //positioning the title GIF
 }
-  
+
 function mousePressed() {
   if (state === `title`) {
+    state = `startComic`;
+  }
+  else if (state === `startComic`) {
     state = `game`;
+
   }
   else if (state === `game`) {
     state = `end`;
-  }else if (state === `end`) {
+  }
+  else if (state === `end`) {
     state = `title`;
   }
 }
