@@ -26,6 +26,7 @@ let terrain = [];
 let cursorImg;
 let pizzaImg; //Setting up the pizza image for the game. 
 let backgroundImg; //Setting up the background for the game part to set a scene.
+let titleImg;
 
 const pizzas = [];
 let pizzaSpeed = 0.1;
@@ -39,6 +40,7 @@ function preload() {
   pizzaImg = loadImage('../assets/images/pizza.png');
   backgroundImg = loadImage('../assets/images/bg.png');
   song = loadSound("assets/sounds/gamesound.mp3");
+  titleImg = createImg('../assets/images/intro.gif')
 
 }
 
@@ -84,6 +86,11 @@ function title() {
   texture(_text);
   plane(window.innerWidth - 4, window.innerHeight - 4);
   pop();
+
+  titleImg.position(CENTER)
+  titleImg.size(window.innerWidth, AUTO);
+
+
 }
 
 function game() {
