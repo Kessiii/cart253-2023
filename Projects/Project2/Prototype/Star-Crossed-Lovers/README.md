@@ -1,3 +1,6 @@
-# Template p5 project
+Project 2 : Star-Crossed Lovers
+by Kestrel Villapando
 
-This is the README file for the entire project. For more official projects you should write information here about the nature of the project, your name, any special explanations of how the project works, etc.
+This is a interactive story/short story about Alex who dates this guy Felipe but you will find out, they are both keeping a secret from each other...
+
+I explored this project using WEBGL in p5js which was a challenge and perlin noise to generate the "interactive" or game part of my little story. 
