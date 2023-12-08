@@ -261,7 +261,7 @@ function mountainDraw() {
       pizzaSpeed += 0.1;
       pizzaCount++;
 
-      if (pizzaCount >= 15) {
+      if (pizzaCount >= 10) {
         state = `end`;
       }
   }
