@@ -1,0 +1,269 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+@keyframes RightToLeft { /*animation function for the sliding text*/
+  from {
+      transform: translateX(-33.7%);
+  }
+  to {
+      transform: translateX(-67.435%);/*This weird number is where the cycle restarts
+      and is linked to the length of the text in index.html */
+  }
+}
+
+body {
+  background: linear-gradient(#7ba5ca 0%, #2a4c6a 40%);
+  min-height: 100vh;
+  overflow-x: hidden;
+
+}
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+}
+
+.logo {
+  color: #e53434;
+  font-size: 3em;
+  cursor: default;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 600;
+  padding: 6px 15px;
+  border-radius: 20px;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  background: red;
+}
+
+.parallax {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 79vh;
+}
+
+.parallax img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.sec {
+  position: relative;
+  padding: 100px;
+  background: #38668e;
+}
+
+.sec h2 {
+  font-size: 3em;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.sec h2:nth-child(2) {
+  font-size: 2em;
+
+}
+
+.sec p {
+  font-size: 1em;
+  color: #ffffff;
+  font-weight: 300;
+}
+
+.scrolling-text{
+  font-family: myFirstFont;
+  font-size: 4rem;
+  color: white;
+  position: static;
+  top: 16rem;
+  white-space: nowrap;
+  padding: 200px;
+
+  animation: RightToLeft 3s linear infinite;
+}
+
+section.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  width: 100%;
+  height: fit-content;
+  justify-content: space-between;
+  border-top: 1.5px solid white;
+  
+}
+.socials {
+  margin-top: .05rem;
+  margin-left: 1rem;
+  display: flex;
+  color: #ffffff;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+/*2nd page styling (introduction)*/
+section.intro {
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+h1.intro-japan {
+  margin-top: -9rem;
+  margin-left: 3rem;
+  align-self: center;
+  color: #e53434;
+  font-size: 3.5rem;
+  
+}
+
+.temple {
+  width: 60vh;
+  max-width: 500px;
+  height: 60vh;
+  max-height: 500px;
+  margin-top: -4em;
+  margin-left: 3rem;
+  background-position-x: 50%;
+  background-position-y: 50%;
+  background-size: cover;
+  z-index: -2;
+  align-self: center;
+  border-radius: 30px;
+}
+
+p.subhead {
+  color: white;
+  margin-top: -3rem;
+  margin-right: 3rem;
+  margin-left: 3rem;
+  font-size: 1rem;
+  line-height: 1.6rem;
+  text-align: justify;
+}
+
+
+
+
+@media only screen and (max-width: 450px) {
+  .intro-imageAndtext {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  h1.intro-japan {
+      font-size: 2.6em;
+      margin-left: unset;
+      
+  }
+  p.subhead {
+      margin-left: 1.5rem;
+      margin-right: 1.5em;
+  }
+  
+}
+
+/*formating for the pages for desktop*/
+@media only screen and (min-width: 900px) {
+  section.intro {
+      flex-direction: row;
+      align-items: center;
+  }
+  .temple {
+      margin-right: 3em;
+  }
+  p.subhead {
+      font-size: 1.25rem;
+  }
+}
+
+/**/
+@media only screen and (min-width: 1200px) {
+  .wrapper {
+      width: 1200px;
+      margin: 0 auto;
+  }
+
+  header {
+      width: 1200px;
+  }
+}
+
+section.subcities {
+  display: flex;
+  height: fit-content;
+  overflow-x: auto;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  border-radius: 35px;
+  background: #ffce65;
+  padding: 1.38rem;
+  width: 18.5625rem;
+  height: 27.1875rem;
+  flex-shrink: 0;
+}
+
+p.title {
+  color: rgb(255, 16, 16);
+  position: relative;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 0em;
+}
+.frame {
+  margin-top: 1.75rem;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+.card-photo {
+  background-size: contain;
+  height: 10.5rem;
+  width: auto;
+  border-radius: 25px;
+  margin-top: -1em;
+}
+.text {
+  color: white;
+  text-align: left;
+  font-size: 1rem;
+  margin-top: 40px;
+  height: fit-content;
+}
+
+
